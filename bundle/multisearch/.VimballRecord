@@ -1,1 +1,0 @@
-multisearch.vimball: call delete('C:\Users\camza.ROMANIA\Desktop\vimfiles\bundle\multisearch\/plugin/multisearch.vim')|call delete('C:\Users\camza.ROMANIA\Desktop\vimfiles\bundle\multisearch\/doc/Msearch.txt')
