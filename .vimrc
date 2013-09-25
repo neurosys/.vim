@@ -284,6 +284,7 @@ if has("gui")
     ":set guifont=ProggyCleanTT_CE:h12
     ":set guifont=Ubuntu_Mono:h12:cANSI
     :set guifont=Ubuntu_Mono:h9:cANSI
+    ":set guifont=Ubuntu_Mono_derivative_Powerlin:h9:cANSI
 
     " No menu and tab bar
     :set guioptions=
@@ -500,8 +501,8 @@ set virtualedit+=block
 set tags=vtags;/
 
 " Walk trough buffers
-:map <M-j> :bnext<Enter>
-:map <M-k> :bprevious<Enter>
+:map <M-j> :bprevious<Enter>
+:map <M-k> :bnext<Enter>
 :map <M-h> :buffers<Enter>
 
 "autocmd syn *.c
@@ -945,5 +946,19 @@ endif
 "
 
 
-let g:airline_theme="light"
+"let g:airline_theme="light"
+"let g:airline_theme="laederon"
+"let g:airline_theme="molokai"
+let g:airline_theme="tomorrow"
+"let g:airline#extensions#tabline#enabled=1
+"let g:airline#extensions#tabline#show_buffers=1
+"let g:airline#extensions#tabline#buffer_nr_show=1
+let g:airline#extensions#whitespace#enabled=0
+set laststatus=2
+set lazyredraw
+let g:airline_powerline_fonts=0
 
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+    let g:airline_symbols.space=' '
+endif
