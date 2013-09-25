@@ -971,3 +971,8 @@ let g:bufExplorerSortBy='fullpath'
 let g:calendar_monday = 1
 " Show week number
 let g:calendar_weeknm = 1 " 1
+
+
+let g:bufferline_rotate = 1
+let g:bufferline_inactive_highlight = 'StatusLineNC'
+
