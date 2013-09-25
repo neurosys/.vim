@@ -264,11 +264,6 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""
 
 if has("gui")
-    " Specify a nicer layout
-    au GUIEnter * set lines=48 columns=94
-    " Still, by default we should open inf full screen
-    au GUIEnter * simalt ~x
-
     " Set the color schema
     "color darkZ
     "color elflord
@@ -280,11 +275,20 @@ if has("gui")
     "set background=light
     set background=dark
 
-    " Use a nicer font
-    ":set guifont=ProggyCleanTT_CE:h12
-    ":set guifont=Ubuntu_Mono:h12:cANSI
-    :set guifont=Ubuntu_Mono:h9:cANSI
-    ":set guifont=Ubuntu_Mono_derivative_Powerlin:h9:cANSI
+    if has("gui_running") && has("unix")
+        set guifont=Ubuntu\ Mono\ 13
+    else
+        " Specify a nicer layout
+        au GUIEnter * set lines=48 columns=94
+        " Use a nicer font
+        ":set guifont=ProggyCleanTT_CE:h12
+        ":set guifont=Ubuntu_Mono:h12:cANSI
+        :set guifont=Ubuntu_Mono:h9:cANSI
+        ":set guifont=Ubuntu_Mono_derivative_Powerlin:h9:cANSI
+        "
+        " Still, by default we should open inf full screen
+        au GUIEnter * simalt ~x
+    endif
 
     " No menu and tab bar
     :set guioptions=
@@ -535,10 +539,6 @@ autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       c
 " </in c match these operators too>
 
 " <backup zone>
-    " If present, store backup files in ".backup"
-    :set backupdir=.\.backup,.,\tmp
-    :set directory=.,.\.backup,\tmp
-
     " No persistent backup
     :set nobackup
 
@@ -945,14 +945,12 @@ endif
 " for more advanced stuff:
 "
 
+if has("gui_running")
+    let g:airline_theme="tomorrow"
+else
+    let g:airline_theme="light"
+endif
 
-"let g:airline_theme="light"
-"let g:airline_theme="laederon"
-"let g:airline_theme="molokai"
-let g:airline_theme="tomorrow"
-"let g:airline#extensions#tabline#enabled=1
-"let g:airline#extensions#tabline#show_buffers=1
-"let g:airline#extensions#tabline#buffer_nr_show=1
 let g:airline#extensions#whitespace#enabled=0
 set laststatus=2
 set lazyredraw
@@ -962,3 +960,10 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
     let g:airline_symbols.space=' '
 endif
+
+
+" Show detailed help.
+let g:bufExplorerDetailedHelp=1
+" To control weither or not to show buffers on for the specific tab or not, use
+"let g:bufExplorerShowTabBuffer=0
+let g:bufExplorerSortBy='fullpath'
