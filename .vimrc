@@ -964,6 +964,10 @@ endif
 
 " Show detailed help.
 let g:bufExplorerDetailedHelp=1
-" To control weither or not to show buffers on for the specific tab or not, use
-"let g:bufExplorerShowTabBuffer=0
+" By default sort files by path
 let g:bufExplorerSortBy='fullpath'
+
+" In calendar start the week with Monday
+let g:calendar_monday = 1
+" Show week number
+let g:calendar_weeknm = 1 " 1
