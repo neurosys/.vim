@@ -282,8 +282,8 @@ if has("gui")
         au GUIEnter * set lines=48 columns=94
         " Use a nicer font
         ":set guifont=ProggyCleanTT_CE:h12
-        ":set guifont=Ubuntu_Mono:h12:cANSI
-        :set guifont=Ubuntu_Mono:h9:cANSI
+        :set guifont=Ubuntu_Mono:h11:cANSI
+        ":set guifont=Ubuntu_Mono:h10:cANSI
         ":set guifont=Ubuntu_Mono_derivative_Powerlin:h9:cANSI
         "
         " Still, by default we should open inf full screen
@@ -724,6 +724,7 @@ endfunction
 ":map! <F9> <Esc>:cp<Enter>
 
 :map <silent> \m :Msearch add /<C-R>=expand("<cword>")<CR>/<Enter>
+: map <silent> \mm :Msearch! delete<Enter>
 
 " <abbreviations>
 :ab pt pentru
@@ -752,7 +753,7 @@ endfunction
 ":nmap <C-c> p==yy
 :map <silent> \d oMONITOR->Print(_T("DEXTRACE:>> (1)"));<Esc>==
 :map <silent> \st oOS_TASK->StackTrace();<Esc>==
-:map <silent> <C-c> p==<C-a>
+:map <silent> <C-c> p==<C-a>yy
 
 
 " Store the name of the current function (you must be over it)
@@ -773,6 +774,7 @@ map ZZ zz
 " Clear highligts for the searches (does not affect the multi search part, for
 " that use :SearchReset)
 ":map <F5> :nohls<Enter>
+:map <silent> \<space> :nohls<Enter>
 
 " Multi search shortcut
 " :map <F3> :Search <C-r><C-w><Enter>
@@ -976,3 +978,7 @@ let g:calendar_weeknm = 1 " 1
 let g:bufferline_rotate = 1
 let g:bufferline_inactive_highlight = 'StatusLineNC'
 
+if has("persistent_undo")
+    "set undodir = '/path/to/what/you/want/'
+    set undofile
+endif
