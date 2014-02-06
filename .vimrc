@@ -787,6 +787,8 @@ map ZZ zz
 :imap <F1> :tab split<Enter>
 
 
+:map <silent> \f :FufFile<Enter>
+
 
 " PYTHON ZONE ----------------
 "function! PutMyTraces(file_name, function_name)
