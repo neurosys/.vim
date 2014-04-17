@@ -716,7 +716,7 @@ endfunction
 ":map \a :lgrep -i <C-R>=expand("<cword>")<CR>  --include=*.h --include=*.cpp .<Enter>
 ":map \A :lgrep <C-R>=expand("<cword>")<CR> --include=*.h --include=*.cpp . <Enter>
 ":map \t :lgrep <C-R>=expand("<cword>")<CR> . <Enter>
-:map \g :lgrep <C-R>=expand("<cword>")<CR> --include=*.cpp trunk/<Enter>
+":map \h :tab split<Enter>:
 
 :map <silent> \s :tab split<Enter>
 " Jump to previous result in the quickfix list
@@ -726,6 +726,7 @@ endfunction
 :map <silent> \m :Msearch add /<C-R>=expand("<cword>")<CR>/<Enter>
 : map <silent> \mm :Msearch! delete<Enter>
 
+:vmap <silent> \j :! par -j 80<Enter>
 " <abbreviations>
 :ab pt pentru
 
@@ -815,6 +816,46 @@ map ZZ zz
 "map <F1> :python executor('<C-R><C-W>')<Enter>
 "map <F2> :python test_executor('<C-R><C-W>')<Enter>
 " / PYTHON ZONE --------------
+
+function! LoadHeader()
+python << EOF
+import vim
+def IsHeader(filename):
+    lower_name = filename.lower()
+    is_header = False
+    list_of_header_extensions = (".h", ".hpp", ".hxx")
+    for ext in list_of_header_extensions:
+        if lower_name.find(ext) != -1:
+            is_header = True
+    return is_header
+
+def GetCppName(filename):
+    extension_index = filename.rfind(".")
+    if extension_index != -1:
+        return filename[:extension_index] + ".cpp"
+
+def GetHeaderName(filename):
+    extension_index = filename.rfind(".")
+    if extension_index != -1:
+        return filename[:extension_index] + ".h"
+
+def SwitchToHeader():
+    current_file_name = vim.current.buffer.name
+    start_file_name = current_file_name.rfind("/")
+    current_file_name = current_file_name[start_file_name + 1:]
+    is_header = IsHeader(current_file_name)
+    next_filename = None
+    if is_header:
+        next_filename = GetCppName(current_file_name)
+    else:
+        next_filename = GetHeaderName(current_file_name)
+    print(next_filename)
+    vim.command("cs find f " + next_filename)
+
+SwitchToHeader()
+EOF
+endfunction
+map <silent> \h :call LoadHeader()<Enter>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " Unknown options from vimrc_example.vim
@@ -977,8 +1018,9 @@ let g:calendar_monday = 1
 let g:calendar_weeknm = 1 " 1
 
 
-let g:bufferline_rotate = 1
-let g:bufferline_inactive_highlight = 'StatusLineNC'
+let g:airline#extensions#bufferline#enabled = 0
+"let g:bufferline_rotate = 1
+"let g:bufferline_inactive_highlight = 'StatusLineNC'
 
 if has("persistent_undo")
     "set undodir = '/path/to/what/you/want/'
