@@ -985,6 +985,14 @@ endif
 " For use of pathogen with vimballs use:
 " :UseVimball ~/.vim/bundle/bundle-dir-name-here
 
+" To add a submodule use:
+" git submodule add <git repo url> bundle/<name for future submodule>
+" git add .
+" git commit -m 'Added my submodule X'
+" git push origin master
+"
+" For Windows, this should be made from vimfiles folder (not the .vim symlink under cygwin)
+"
 "git config --global http.proxy http://proxyuser:proxypwd@proxy.server.com:8080
 :execute pathogen#infect()
 " for more advanced stuff:
