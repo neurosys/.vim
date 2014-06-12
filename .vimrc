@@ -714,7 +714,7 @@ endfunction
 ":map \c :lgrep -i <C-R>=expand("<cword>")<CR>  --include=*.cpp .<Enter>
 ":map \C :lgrep <C-R>=expand("<cword>")<CR>  --include=*.cpp .<Enter>
 ":map \a :lgrep -i <C-R>=expand("<cword>")<CR>  --include=*.h --include=*.cpp .<Enter>
-":map \A :lgrep <C-R>=expand("<cword>")<CR> --include=*.h --include=*.cpp . <Enter>
+:map <silent> \g :tab split<Enter>:lgrep <C-R>=expand("<cword>")<CR> --include=*.h --include=*.cpp . <Enter>
 ":map \t :lgrep <C-R>=expand("<cword>")<CR> . <Enter>
 ":map \h :tab split<Enter>:
 
