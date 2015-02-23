@@ -276,7 +276,14 @@ if has("gui")
     set background=dark
 
     if has("gui_running") && has("unix")
-        set guifont=Ubuntu\ Mono\ 13
+        if has("gui_gtk2")
+            "set guifont=Monospace\ 12
+            set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+            "set guifont=DejaVu\ Sans\ Mono\ 12
+            "set guifont=Fixed\ 12
+        else
+            set guifont=Ubuntu\ Mono\ 13
+        endif
     else
         " Specify a nicer layout
         au GUIEnter * set lines=48 columns=94
@@ -499,7 +506,7 @@ command Spell setlocal spell spelllang=en_us
 set virtualedit+=block
 
 " Automatically load cscope.out if present
-:cs add cscope.out
+":cs add cscope.out
 
 " Look for the tags file, up in the folder hierarchy
 set tags=vtags;/
@@ -581,15 +588,19 @@ autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       c
 " </VimWiki settings>
 
 " <tagbar>
-    :map <silent> <F12> :TagbarToggle<Enter>
+    ":map <silent> <F12> :TagbarToggle<Enter>
+    :map <silent> \t :TagbarToggle<Enter>
 " </tagbar>
 
 " <undotree
-    :map <silent> <F11> :UndotreeToggle<Enter>
+    ":map <silent> <F11> :UndotreeToggle<Enter>
+    :map <silent> \u :UndotreeToggle<Enter>
 " </undotree>
 
 " <NERD tree>
-    :map <silent> <F10> :NERDTreeToggle<Enter>
+    ":map <silent> <F10> :NERDTreeToggle<Enter>
+    :map <silent> \n :NERDTreeToggle<Enter>
+
 " <NERD tree>
 
 
@@ -643,7 +654,8 @@ autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       c
 
 
 " <Review mode>
-map <silent> <F9> :call FormattingToggle()<Enter>
+"map <silent> <F9> :call FormattingToggle()<Enter>
+map <silent> \e :call FormattingToggle()<Enter>
 let g:FormattingToggleOn=0
 function FormattingToggle()
     if g:FormattingToggleOn == 1
@@ -994,6 +1006,12 @@ endif
 " For Windows, this should be made from vimfiles folder (not the .vim symlink under cygwin)
 "
 "git config --global http.proxy http://proxyuser:proxypwd@proxy.server.com:8080
+"
+" After the download of the repo, be sure to run the command below in order to
+" have the submodules downloaded
+"git submodule update --init
+"
+"
 :execute pathogen#infect()
 " for more advanced stuff:
 "
