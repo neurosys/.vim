@@ -278,9 +278,10 @@ if has("gui")
     if has("gui_running") && has("unix")
         if has("gui_gtk2")
             "set guifont=Monospace\ 12
-            set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+            "set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
             "set guifont=DejaVu\ Sans\ Mono\ 12
             "set guifont=Fixed\ 12
+            set guifont=Liberation\ Mono\ for\ Powerline\ 12
         else
             set guifont=Ubuntu\ Mono\ 13
         endif
@@ -1017,19 +1018,30 @@ endif
 "
 
 if has("gui_running")
-    let g:airline_theme="tomorrow"
+    "let g:airline_theme="tomorrow"
+    let g:airline_theme="solarized"
 else
-    let g:airline_theme="light"
+    "let g:airline_theme="light"
+    "let g:airline_theme="jellybeans"
+    let g:airline_theme="solarized"
+    "let g:airline_theme="tomorrow"
+    "let g:airline_theme="zenburn"
 endif
 
 let g:airline#extensions#whitespace#enabled=0
 set laststatus=2
 set lazyredraw
-let g:airline_powerline_fonts=0
 
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-    let g:airline_symbols.space=' '
+let g:airline_powerline_fonts=1
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+
+
+if g:airline_powerline_fonts == 0
+    if !exists('g:airline_symbols')
+       let g:airline_symbols = {}
+       let g:airline_symbols.space=' '
+    endif
 endif
 
 
@@ -1044,7 +1056,7 @@ let g:calendar_monday = 1
 let g:calendar_weeknm = 1 " 1
 
 
-let g:airline#extensions#bufferline#enabled = 0
+"let g:airline#extensions#bufferline#enabled = 0
 "let g:bufferline_rotate = 1
 "let g:bufferline_inactive_highlight = 'StatusLineNC'
 
