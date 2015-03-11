@@ -61,3 +61,6 @@
 [submodule "bundle/vim-ack"]
 	path = bundle/vim-ack
 	url = https://github.com/mileszs/ack.vim.git
+[submodule "bundle/powerline_fonts"]
+	path = bundle/powerline_fonts
+	url = https://github.com/powerline/fonts.git
