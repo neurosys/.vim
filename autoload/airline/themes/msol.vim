@@ -62,6 +62,8 @@ function! s:generate()
   let s:I3 = s:N3
   let s:IF = s:NF
   let s:IM = s:NM
+  " <fg> <bg> "font type"
+  let s:TAB = [s:base3, s:base01, 'bold']
 
   " Visual mode
   let s:V1 = [s:N1[0], s:magenta, 'bold']
@@ -148,9 +150,13 @@ function! s:generate()
 
   let g:airline#themes#msol#palette.tabline = {}
 
+" let g:airline#themes#msol#palette.tabline.airline_tab = [
+"       \ s:I2[0].g, s:I2[1].g, s:I2[0].t, s:I2[1].t, s:I2[2]]
   let g:airline#themes#msol#palette.tabline.airline_tab = [
-        \ s:I2[0].g, s:I2[1].g, s:I2[0].t, s:I2[1].t, s:I2[2]]
+        \ s:I2[0].g, s:I2[1].g, s:TAB[0].t, s:TAB[1].t, s:TAB[2]]
 
+" let g:airline#themes#msol#palette.tabline.airline_tabtype = [
+"       \ s:N2[0].g, s:N2[1].g, s:N2[0].t, s:N2[1].t, s:N2[2]]
   let g:airline#themes#msol#palette.tabline.airline_tabtype = [
         \ s:N2[0].g, s:N2[1].g, s:N2[0].t, s:N2[1].t, s:N2[2]]
 endfunction
