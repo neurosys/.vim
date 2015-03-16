@@ -1024,7 +1024,7 @@ if has("gui_running")
 else
     "let g:airline_theme="light"
     "let g:airline_theme="jellybeans"
-    let g:airline_theme="solarized"
+    let g:airline_theme="msol"
     "let g:airline_theme="tomorrow"
     "let g:airline_theme="zenburn"
 endif
