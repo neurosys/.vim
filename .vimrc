@@ -313,6 +313,9 @@ else
     " Suggest use of colors that look good on dark backgrounds
     set background=dark
     set term=$TERM
+    "color colorzone
+    "color darkdot
+    "color devbox-dark-256 " merge bine cu AirlineTheme bubblegum
     color elflord
 endif
 
@@ -638,7 +641,8 @@ autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       c
     "map <F9> :call TagPreviewerToggle()<Enter>
     " display prototype in preview window
     "map <M-i> <C-w>}
-    map <silent> <M-i> :call TagPreviewerToggle()<Enter>
+    "map <silent> <M-i> :call TagPreviewerToggle()<Enter>
+    map <silent> \i :call TagPreviewerToggle()<Enter>
     let g:TagPreviewerOpen=0
 
     function TagPreviewerToggle()
