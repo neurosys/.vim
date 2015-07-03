@@ -24,3 +24,9 @@ git push origin master
 git submodule deinit bundle/vim-rvm
 git rm bundle/vim-rvm
 git rm --cached bundle/vim-rvm
+
+== To update the submodules you need to run this in the bundle directory ==
+
+for i in * ; do echo "$i" ; cd "$i" ; git pull origin master ; cd .. ; done
+
+and then commit all the changes
