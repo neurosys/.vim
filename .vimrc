@@ -1019,6 +1019,12 @@ endif
 " have the submodules downloaded
 "git submodule update --init
 "
+" To remove a submodule use:
+" git deinit -f bundle/<name of the submodule>
+"
+" Remove the entry from .gitmodule
+" and then run
+" git rm --cached bundle/<name of the submodule>
 "
 :execute pathogen#infect()
 " for more advanced stuff:
