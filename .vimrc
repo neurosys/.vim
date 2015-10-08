@@ -747,6 +747,9 @@ endfunction
 " <abbreviations>
 :ab pt pentru
 
+" Copy in clipboard (on linux only?) up to the ending line (useful for stack traces)
+:map <silent> \y "+y$
+
 "
 :ab --- -------------------------------------------------------------------------------
 :ab === ===============================================================================
