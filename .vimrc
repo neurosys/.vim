@@ -1034,3 +1034,7 @@ if has("persistent_undo")
     "set undodir = '/path/to/what/you/want/'
     set undofile
 endif
+
+
+let g:ackprg="ack"
+let g:ack_default_options=" -H --nocolor --nogroup --column"
