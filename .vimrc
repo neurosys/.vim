@@ -276,7 +276,15 @@ if has("gui")
     set background=dark
 
     if has("gui_running") && has("unix")
-        set guifont=Ubuntu\ Mono\ 13
+        if has("gui_gtk2")
+            "set guifont=Monospace\ 12
+            "set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+            "set guifont=DejaVu\ Sans\ Mono\ 12
+            "set guifont=Fixed\ 12
+            set guifont=Liberation\ Mono\ for\ Powerline\ 12
+        else
+            set guifont=Ubuntu\ Mono\ 13
+        endif
     else
         " Specify a nicer layout
         au GUIEnter * set lines=48 columns=94
@@ -305,6 +313,9 @@ else
     " Suggest use of colors that look good on dark backgrounds
     set background=dark
     set term=$TERM
+    "color colorzone
+    "color darkdot
+    "color devbox-dark-256 " merge bine cu AirlineTheme bubblegum
     color elflord
 endif
 
@@ -499,7 +510,7 @@ command Spell setlocal spell spelllang=en_us
 set virtualedit+=block
 
 " Automatically load cscope.out if present
-:cs add cscope.out
+":cs add cscope.out
 
 " Look for the tags file, up in the folder hierarchy
 set tags=vtags;/
@@ -581,15 +592,19 @@ autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       c
 " </VimWiki settings>
 
 " <tagbar>
-    :map <silent> <F12> :TagbarToggle<Enter>
+    ":map <silent> <F12> :TagbarToggle<Enter>
+    :map <silent> \t :TagbarToggle<Enter>
 " </tagbar>
 
 " <undotree
-    :map <silent> <F11> :UndotreeToggle<Enter>
+    ":map <silent> <F11> :UndotreeToggle<Enter>
+    :map <silent> \u :UndotreeToggle<Enter>
 " </undotree>
 
 " <NERD tree>
-    :map <silent> <F10> :NERDTreeToggle<Enter>
+    ":map <silent> <F10> :NERDTreeToggle<Enter>
+    :map <silent> \n :NERDTreeToggle<Enter>
+
 " <NERD tree>
 
 
@@ -626,7 +641,8 @@ autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       c
     "map <F9> :call TagPreviewerToggle()<Enter>
     " display prototype in preview window
     "map <M-i> <C-w>}
-    map <silent> <M-i> :call TagPreviewerToggle()<Enter>
+    "map <silent> <M-i> :call TagPreviewerToggle()<Enter>
+    map <silent> \i :call TagPreviewerToggle()<Enter>
     let g:TagPreviewerOpen=0
 
     function TagPreviewerToggle()
@@ -643,7 +659,8 @@ autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       c
 
 
 " <Review mode>
-map <silent> <F9> :call FormattingToggle()<Enter>
+"map <silent> <F9> :call FormattingToggle()<Enter>
+map <silent> \e :call FormattingToggle()<Enter>
 let g:FormattingToggleOn=0
 function FormattingToggle()
     if g:FormattingToggleOn == 1
@@ -729,6 +746,9 @@ endfunction
 :vmap <silent> \j :! par -j 80<Enter>
 " <abbreviations>
 :ab pt pentru
+
+" Copy in clipboard (on linux only?) up to the ending line (useful for stack traces)
+:map <silent> \y "+y$
 
 "
 :ab --- -------------------------------------------------------------------------------
@@ -994,24 +1014,58 @@ endif
 " For Windows, this should be made from vimfiles folder (not the .vim symlink under cygwin)
 "
 "git config --global http.proxy http://proxyuser:proxypwd@proxy.server.com:8080
+"
+" After the download of the repo, be sure to run the command below in order to
+" have the submodules downloaded
+"git submodule update --init
+"
+" To remove a submodule use:
+" git deinit -f bundle/<name of the submodule>
+"
+" Remove the entry from .gitmodule
+" and then run
+" git rm --cached bundle/<name of the submodule>
+"
 :execute pathogen#infect()
 " for more advanced stuff:
 "
 
 if has("gui_running")
-    let g:airline_theme="tomorrow"
+    "let g:airline_theme="tomorrow"
+    "let g:airline_theme="solarized"
+    let g:airline_theme="badwolf"
 else
-    let g:airline_theme="light"
+    "let g:airline_theme="light"
+    "let g:airline_theme="jellybeans"
+    let g:airline_theme="msol"
+    "let g:airline_theme="tomorrow"
+    "let g:airline_theme="zenburn"
 endif
 
 let g:airline#extensions#whitespace#enabled=0
 set laststatus=2
 set lazyredraw
-let g:airline_powerline_fonts=0
 
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-    let g:airline_symbols.space=' '
+" Airline can use the patched fonts to display cool effects in status bar
+let g:airline_powerline_fonts=1
+
+" Do not enable integration with bufferline (keep the airline for other info)
+let g:airline#extensions#bufferline#enabled = 0
+
+" Let bufferline echo to the command bar
+let g:bufferline_echo = 1
+
+" The characters used to mark the current buffer in bufferline
+let g:bufferline_active_buffer_left = '['
+let g:bufferline_active_buffer_right = ']'
+
+" Airline can also make the tabline look fancy
+let g:airline#extensions#tabline#enabled = 1
+
+if g:airline_powerline_fonts == 0
+    if !exists('g:airline_symbols')
+       let g:airline_symbols = {}
+    endif
 endif
 
 
@@ -1025,10 +1079,6 @@ let g:calendar_monday = 1
 " Show week number
 let g:calendar_weeknm = 1 " 1
 
-
-let g:airline#extensions#bufferline#enabled = 0
-"let g:bufferline_rotate = 1
-"let g:bufferline_inactive_highlight = 'StatusLineNC'
 
 if has("persistent_undo")
     "set undodir = '/path/to/what/you/want/'
