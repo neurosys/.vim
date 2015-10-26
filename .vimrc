@@ -1103,3 +1103,23 @@ endif
 
 let g:ackprg="ack"
 let g:ack_default_options=" -H --nocolor --nogroup --column"
+
+
+
+function! CustomSyntaxOperatorHighlight()
+    syntax keyword Boolean true false NULL TRUE FALSE
+    syntax keyword Statement namespace stderr stdin stdout new this delete
+
+    syntax match _Block "[{}]"
+    syntax match _Bracket "[\[\]]"
+    syntax match _Operator "[-+&|<>=!\/~.,;:*%&^?(){}]"
+    syntax region _Comment start="\/\*" end="\*\/"
+    syntax match _Comment "\/\/.*$"
+
+    hi _Block guifg=yellow1 guibg=NONE gui=none
+    hi link _Bracket Constant
+    hi link _Operator Operator
+    hi link _Comment Comment
+endfunction
+
+autocmd! FileType c,cpp,java,php,cs,javascript call CustomSyntaxOperatorHighlight()
