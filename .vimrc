@@ -614,7 +614,7 @@ autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       c
 
 " <tagbar>
     ":map <silent> <F12> :TagbarToggle<Enter>
-    :map <silent> \t :TagbarToggle<Enter>
+    :map <silent> \tag :TagbarToggle<Enter>
 " </tagbar>
 
 " <undotree
