@@ -333,6 +333,9 @@ endif
 "
 "
 
+" Imporove performance by reducing the redraws
+:set lazyredraw
+
 " No bell, now flashes, NO FUCKING THING !!!!
 :set noerrorbells
 :set visualbell
@@ -345,9 +348,16 @@ endif
 set ruler
 
 " All tabs must have 4 spaces ONLY !!!!
-:set ts=4
-:set st=4
-:set sw=4
+" 
+" Number of spaces to display when encounter a <Tab> in a file
+:set tabstop=4
+" Number of spaces to insert when pressing <Tab>
+:set softtabstop=4
+" Number of spaces to insert in place of a <Tab> when indenting
+:set shiftwidth=4
+
+" Remove all the existing autocmds (useful when you re-source .vimrc)
+:autocmd!
 
 " define custom colors for things
 if !exists("autocmd_colorscheme_loaded")
@@ -453,8 +463,9 @@ filetype indent plugin on
 " confirmation
 set confirm
 
-" Command line completion
+" Command line completion (hit tab and switch to next available command or file)
 set wildmenu
+" List all available options coresponding to already entered characters
 set wildmode=list:full
 
 " Auto complete
@@ -462,7 +473,7 @@ set completeopt=menu,longest,preview
 
 
 " Stop folding
-set nofoldenable
+"set nofoldenable
 
 
 " Allow buffer switching without write
@@ -489,7 +500,7 @@ set textwidth=0
 
 " Highlight the current line, but only in the current window
 "au WinEnter * setlocal cursorline
-":setlocal cursorline
+"setlocal cursorline
 "au WinLeave * setlocal nocursorline
 
 " Leave insert mode after 15 seconds of no imput
@@ -567,14 +578,24 @@ autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       c
 
 " <folding>
     " Stop folding
-    set nofoldenable
+    "set nofoldenable
+    "set foldenable
 
     "set foldmethod=marker
     "foldmarker, so Vim will know where to fold
-    "set foldmarker={{{,}}}
+    set foldmarker={,}
     "folding marker, for automatic folding
     "imap <F1> 0i/* {{{ $a */
     "imap <F2> 0i/* }}} $a */
+
+    " Fold based on indentation
+    set foldmethod=manual
+
+    " Open / Close folds
+    nnoremap <space> za
+
+    "foldlevelstart=10
+    set foldnestmax=10
 " <folding>
 
 
@@ -1044,7 +1065,6 @@ endif
 
 let g:airline#extensions#whitespace#enabled=0
 set laststatus=2
-set lazyredraw
 
 " Airline can use the patched fonts to display cool effects in status bar
 let g:airline_powerline_fonts=1
