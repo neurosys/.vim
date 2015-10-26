@@ -747,14 +747,9 @@ endfunction
 :map <C-l> :lne<Enter>
 :map! <C-l> <Esc>:lne<Enter>
 
-":map \h :lgrep -i <C-R>=expand("<cword>")<CR>  --include=*.h .<Enter>
-":map \H :lgrep <C-R>=expand("<cword>")<CR>  --include=*.h .<Enter>
-":map \c :lgrep -i <C-R>=expand("<cword>")<CR>  --include=*.cpp .<Enter>
-":map \C :lgrep <C-R>=expand("<cword>")<CR>  --include=*.cpp .<Enter>
-":map \a :lgrep -i <C-R>=expand("<cword>")<CR>  --include=*.h --include=*.cpp .<Enter>
-:map <silent> \g :tab split<Enter>:lgrep <C-R>=expand("<cword>")<CR> --include=*.h --include=*.cpp . <Enter>
-":map \t :lgrep <C-R>=expand("<cword>")<CR> . <Enter>
-":map \h :tab split<Enter>:
+:map <silent> \gc :tab split<Enter>:lgrep <C-R>=expand("<cword>")<CR> --include=*.cpp . <Enter>
+:map <silent> \gh :tab split<Enter>:lgrep <C-R>=expand("<cword>")<CR> --include=*.h . <Enter>
+:map <silent> \ga :tab split<Enter>:lgrep -I --exclude-dir=.svn --exclude-dir=.git --exclude=vtags --exclude=cscope.* --exclude=*.svn-base <C-R>=expand("<cword>")<CR> . <Enter>
 
 :map <silent> \s :tab split<Enter>
 " Jump to previous result in the quickfix list
