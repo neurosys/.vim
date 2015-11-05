@@ -285,6 +285,7 @@ if has("gui")
         else
             set guifont=Ubuntu\ Mono\ 13
         endif
+        set lines=45 columns=80
     else
         " Specify a nicer layout
         au GUIEnter * set lines=48 columns=94
@@ -360,21 +361,21 @@ set ruler
 :autocmd!
 
 " define custom colors for things
-if !exists("autocmd_colorscheme_loaded")
-    let autocmd_colorscheme_loaded = 1
-
-    autocmd ColorScheme * highlight TodoRed         ctermbg=DarkGreen   guibg=#002b37 ctermfg=LightRed     guifg=#E01B1B
-    autocmd ColorScheme * highlight TodoOrange      ctermbg=DarkGreen   guibg=#002b37 ctermfg=LightMagenta guifg=#E0841B
-    autocmd ColorScheme * highlight TodoYellow      ctermbg=DarkGreen   guibg=#002b37 ctermfg=LightYellow  guifg=#E0D91B
-    autocmd ColorScheme * highlight MyTodo          ctermbg=LightGrey   guibg=#002b37 ctermfg=LightYellow  guifg=#E0D91B
-
-    autocmd ColorScheme * highlight match           ctermbg=White       guibg=White   ctermfg=DarkBlue     guifg=DarkBlue
-    autocmd ColorScheme * highlight 2match          ctermbg=Blue        guibg=Blue    ctermfg=White        guifg=White
-    autocmd ColorScheme * highlight 3match          ctermbg=Green       guibg=Green   ctermfg=Black        guifg=Black
-
-    " Used to highlight redundant white spaces and tabs at the end of the line            
-    autocmd ColorScheme * highlight RedundantSpaces ctermbg=DarkMagenta guibg=#DfD090
-endif
+"if !exists("autocmd_colorscheme_loaded")
+"    let autocmd_colorscheme_loaded = 1
+"
+"    autocmd ColorScheme * highlight TodoRed         ctermbg=DarkGreen   guibg=#002b37 ctermfg=LightRed     guifg=#E01B1B
+"    autocmd ColorScheme * highlight TodoOrange      ctermbg=DarkGreen   guibg=#002b37 ctermfg=LightMagenta guifg=#E0841B
+"    autocmd ColorScheme * highlight TodoYellow      ctermbg=DarkGreen   guibg=#002b37 ctermfg=LightYellow  guifg=#E0D91B
+"    autocmd ColorScheme * highlight MyTodo          ctermbg=LightGrey   guibg=#002b37 ctermfg=LightYellow  guifg=#E0D91B
+"
+"    autocmd ColorScheme * highlight match           ctermbg=White       guibg=White   ctermfg=DarkBlue     guifg=DarkBlue
+"    autocmd ColorScheme * highlight 2match          ctermbg=Blue        guibg=Blue    ctermfg=White        guifg=White
+"    autocmd ColorScheme * highlight 3match          ctermbg=Green       guibg=Green   ctermfg=Black        guifg=Black
+"
+"    " Used to highlight redundant white spaces and tabs at the end of the line            
+"    autocmd ColorScheme * highlight RedundantSpaces ctermbg=DarkMagenta guibg=#DfD090
+"endif
 " Available terminal colors:
 " - Black
 " - DarkBlue
@@ -402,19 +403,19 @@ endif
 " TODO2
 " TODO3
 
-if has("autocmd")
-    if v:version > 701
-        autocmd Syntax * call matchadd('TodoRed',  '\W\zs\(TODO1\)')
-        autocmd Syntax * call matchadd('TodoOrange', '\W\zs\(TODO2\)')
-        autocmd Syntax * call matchadd('ToDoYellow', '\W\zs\(TODO3\)')
-        autocmd Syntax * call matchadd('MyTodo', '\W\zs\(elflord\)')
-
-        autocmd Syntax * call matchadd('match',  '\(TODO1\)')
-        autocmd Syntax * call matchadd('2match', '\(TODO2\)')
-        autocmd Syntax * call matchadd('3match', '\(TODO3\)')
-        "autocmd Syntax * call matchadd('3match', '\W\zs\(TODO3\)')
-    endif
-endif
+"if has("autocmd")
+"    if v:version > 701
+"        autocmd Syntax * call matchadd('TodoRed',  '\W\zs\(TODO1\)')
+"        autocmd Syntax * call matchadd('TodoOrange', '\W\zs\(TODO2\)')
+"        autocmd Syntax * call matchadd('ToDoYellow', '\W\zs\(TODO3\)')
+"        autocmd Syntax * call matchadd('MyTodo', '\W\zs\(elflord\)')
+"
+"        autocmd Syntax * call matchadd('match',  '\(TODO1\)')
+"        autocmd Syntax * call matchadd('2match', '\(TODO2\)')
+"        autocmd Syntax * call matchadd('3match', '\(TODO3\)')
+"        "autocmd Syntax * call matchadd('3match', '\W\zs\(TODO3\)')
+"    endif
+"endif
 
 " Do not wrap lines (useful in 60% cases, very annoying in rest)
 set nowrap
@@ -470,11 +471,6 @@ set wildmode=list:full
 
 " Auto complete
 set completeopt=menu,longest,preview
-
-
-" Stop folding
-"set nofoldenable
-
 
 " Allow buffer switching without write
 set hidden
@@ -533,31 +529,8 @@ set tags=vtags;/
 
 "autocmd syn *.c
 " <in c match these operators too>
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "?"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "\~"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "%"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "\^"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "[^/*]/[^/*]"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "="
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "+"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "-"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "!"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       ">"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "<"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       ";"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "&"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "*"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "|"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "{"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "}"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       ","
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "\."
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "\["
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "\]"
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "("
-" autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       ")"
-autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "[\+\->=!<?;~\^\(\)\[\]:}{,\.\|&\*%~]"
-autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "[^/*]/[^/*]"
+"autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "[\+\->=!<?;~\^\(\)\[\]:}{,\.\|&\*%~]"
+"autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "[^/*]/[^/*]"
 " </in c match these operators too>
 
 " <backup zone>
@@ -590,12 +563,16 @@ autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       c
 
     " Fold based on indentation
     set foldmethod=manual
+    "set foldmethod=marker
+
+    " Open folds for the following operations
+    set foldopen=block,hor,mark,percent,quickfix,search,tag,undo
 
     " Open / Close folds
-    nnoremap <space> za
+    nnoremap <space> zA
 
-    "foldlevelstart=10
-    set foldnestmax=10
+    set foldlevelstart=0
+    "set foldnestmax=2
 " <folding>
 
 
@@ -1123,3 +1100,18 @@ function! CustomSyntaxOperatorHighlight()
 endfunction
 
 autocmd! FileType c,cpp,java,php,cs,javascript call CustomSyntaxOperatorHighlight()
+
+if has("gui")
+    hi TodoRed guifg=Black guibg=Red gui=none
+    hi TodoYellow guifg=Black guibg=Yellow gui=none
+    hi TodoBlue guifg=Black guibg=DarkBlue gui=none
+else
+    hi TodoRed ctermfg=Black ctermbg=Red
+    "hi TodoRed ctermfg=Red ctermbg=Black
+    hi TodoYellow ctermfg=Black ctermbg=DarkMagenta
+    hi TodoBlue ctermfg=Black ctermbg=Blue
+    "hi tchar_type ctermfg=Blue ctermbg=red
+endif
+autocmd! BufNewFile,BufRead * :syn match TodoRed "\<TODO1\>"
+autocmd! BufNewFile,BufRead * :syn match TodoYellow "\/\/ \<TODO2\> .*$"
+"autocmd! BufNewFile,BufRead * :syn match TodoBlue display "\/\/ \<TODO3\>"
