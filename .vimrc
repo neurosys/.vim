@@ -19,6 +19,17 @@
     " jellybeans   ( grey bg, medium contrast) ok for codding... bad for text
     " mustang      ( grey bg, medium contrast) ok for codding... bad for text
     " rootwater    ( grey bg, medium contrast) ok for coding
+    " --------------------------------------------------------------------------------
+    "  For dos-console:
+    " blackbeauty
+    " koehler
+    " blueprint
+    " bmichaelsen
+    " borland
+    " bw
+    " camfire
+    " carvedwoodcool
+    " chela_light
 
 " Ctags
     " -------------------------------------------------------------------------------
@@ -763,7 +774,7 @@ endfunction
 " <abbreviations>
 :ab pt pentru
 
-" Copy in clipboard (on linux only?) up to the ending line (useful for stack traces)
+"  Copy in clipboard (on linux only?) up to the ending line (useful for stack traces)
 :map <silent> \y "+y$
 
 "
