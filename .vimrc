@@ -374,7 +374,7 @@ set ruler
 "    autocmd ColorScheme * highlight 3match          ctermbg=Green       guibg=Green   ctermfg=Black        guifg=Black
 "
 "    " Used to highlight redundant white spaces and tabs at the end of the line            
-"    autocmd ColorScheme * highlight RedundantSpaces ctermbg=DarkMagenta guibg=#DfD090
+autocmd ColorScheme * highlight RedundantSpaces ctermbg=DarkMagenta guibg=#DfD090
 "endif
 " Available terminal colors:
 " - Black
