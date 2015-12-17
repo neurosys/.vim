@@ -37,12 +37,13 @@ function! s:generate()
   " Normal mode
   if s:background == 'dark'
     "let s:N1 = [s:base3, s:base1, 'bold']
-    " DEX Here is my change
+    " Colors for the notation bar (fg, bg)
     let s:N1 = [s:base3, s:blue, 'bold']
     "let s:N2 = [s:base2, (s:tty ? s:base01 : s:base00), '']
-    let s:N2 = [s:base2, s:green, '']
+    let s:N2 = [s:red, s:green, '']
     "let s:N3 = [s:base01, s:base02, '']
-    let s:N3 = [s:base00, s:base02, '']
+    " Colors for the tab bar and status bar (fg, bg)
+    let s:N3 = [s:base01, s:cyan, '']
   else
     let s:N1 = [s:base2, s:base00, 'bold']
     let s:N2 = [(s:tty ? s:base01 : s:base2), s:base1, '']
@@ -81,7 +82,7 @@ function! s:generate()
 
   " Inactive
   if s:background == 'dark'
-    let s:IA = [s:base00, s:base02, '']
+    let s:IA = [s:base01, s:base0, '']
   else
     let s:IA = [s:base1, s:base2, '']
   endif
