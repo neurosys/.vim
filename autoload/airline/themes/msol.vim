@@ -40,10 +40,10 @@ function! s:generate()
     " Colors for the notation bar (fg, bg)
     let s:N1 = [s:base3, s:blue, 'bold']
     "let s:N2 = [s:base2, (s:tty ? s:base01 : s:base00), '']
-    let s:N2 = [s:red, s:green, '']
+    let s:N2 = [s:red, s:base3, '']
     "let s:N3 = [s:base01, s:base02, '']
     " Colors for the tab bar and status bar (fg, bg)
-    let s:N3 = [s:base01, s:cyan, '']
+    let s:N3 = [s:base1, s:base02, '']
   else
     let s:N1 = [s:base2, s:base00, 'bold']
     let s:N2 = [(s:tty ? s:base01 : s:base2), s:base1, '']
@@ -151,10 +151,10 @@ function! s:generate()
 
   let g:airline#themes#msol#palette.tabline = {}
 
-" let g:airline#themes#msol#palette.tabline.airline_tab = [
-"       \ s:I2[0].g, s:I2[1].g, s:I2[0].t, s:I2[1].t, s:I2[2]]
-  let g:airline#themes#msol#palette.tabline.airline_tab = [
-        \ s:I2[0].g, s:I2[1].g, s:TAB[0].t, s:TAB[1].t, s:TAB[2]]
+ let g:airline#themes#msol#palette.tabline.airline_tab = [
+       \ s:I2[0].g, s:I2[1].g, s:I2[0].t, s:I2[1].t, s:I2[2]]
+"  let g:airline#themes#msol#palette.tabline.airline_tab = [
+"        \ s:I2[0].g, s:I2[1].g, s:TAB[0].t, s:TAB[1].t, s:TAB[2]]
 
 " let g:airline#themes#msol#palette.tabline.airline_tabtype = [
 "       \ s:N2[0].g, s:N2[1].g, s:N2[0].t, s:N2[1].t, s:N2[2]]

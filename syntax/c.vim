@@ -197,6 +197,7 @@ if !exists("c_no_ansi") || exists("c_ansi_typedefs")
   syn keyword   cType		mbstate_t wctrans_t wint_t wctype_t
 endif
 if !exists("c_no_c99") " ISO C99
+  syn keyword	cType		ULONG TCHAR BOOL BYTE UBYTE LONGLONG ULONGLONG TEXT
   syn keyword	cType		bool complex
   syn keyword	cType		int8_t int16_t int32_t int64_t
   syn keyword	cType		uint8_t uint16_t uint32_t uint64_t
