@@ -1126,3 +1126,6 @@ endif
 autocmd! BufNewFile,BufRead * :syn match TodoRed "\<TODO1\>"
 autocmd! BufNewFile,BufRead * :syn match TodoYellow "\/\/ \<TODO2\> .*$"
 "autocmd! BufNewFile,BufRead * :syn match TodoBlue display "\/\/ \<TODO3\>"
+
+" Test to see if I can hide markdown syntax
+:set conceallevel=2
