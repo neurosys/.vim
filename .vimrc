@@ -755,8 +755,8 @@ endfunction
 :map <silent> \y "+y$
 
 "
-:ab --- -------------------------------------------------------------------------------
-:ab === ===============================================================================
+:ab ------ -------------------------------------------------------------------------------
+:ab ====== ===============================================================================
 
 " When opening a bracket, we must close it too
 :map! {} {<Enter>}<Esc>O
@@ -1037,7 +1037,8 @@ endif
 if has("gui_running")
     "let g:airline_theme="tomorrow"
     "let g:airline_theme="solarized"
-    let g:airline_theme="badwolf"
+    "let g:airline_theme="badwolf"
+    let g:airline_theme="tomorrow"
 else
     "let g:airline_theme="light"
     "let g:airline_theme="jellybeans"
@@ -1051,6 +1052,18 @@ set laststatus=2
 
 " Airline can use the patched fonts to display cool effects in status bar
 let g:airline_powerline_fonts=1
+
+" Change how tags are displayed in tabgar
+let g:airline#extensions#tagbar#enabled = 1
+
+let g:airline#extensions#tagbar#flags = 'f'
+"let g:airline#extensions#tagbar#flags = 's'
+"let g:airline#extensions#tagbar#flags = 'p'
+
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#capslock#enabled = 0
 
 " Do not enable integration with bufferline (keep the airline for other info)
 let g:airline#extensions#bufferline#enabled = 0
