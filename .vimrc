@@ -1142,3 +1142,7 @@ autocmd! BufNewFile,BufRead * :syn match TodoYellow "\/\/ \<TODO2\> .*$"
 
 " Test to see if I can hide markdown syntax
 :set conceallevel=2
+
+
+" Enable omni completion for CPP
+au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
