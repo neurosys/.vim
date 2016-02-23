@@ -582,8 +582,13 @@ set tags=vtags;/
     " Open / Close folds
     nnoremap <space> zA
 
-    set foldlevelstart=0
-    "set foldnestmax=2
+    set foldlevelstart=2
+    set foldnestmax=4
+    " Extra space to the left of the number column, to show the folding level
+    "set foldcolumn=4
+
+    " Minimal number of lines for which folding is enabled
+    set foldminlines=4
 " <folding>
 
 
@@ -1143,6 +1148,33 @@ autocmd! BufNewFile,BufRead * :syn match TodoYellow "\/\/ \<TODO2\> .*$"
 " Test to see if I can hide markdown syntax
 :set conceallevel=2
 
-
 " Enable omni completion for CPP
 au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
+
+
+function! MarkdownLevel()
+    if getline(v:lnum) =~ '^= .*$'
+        return ">1"
+    endif
+    if getline(v:lnum) =~ '^== .*$'
+        return ">2"
+    endif
+    if getline(v:lnum) =~ '^=== .*$'
+        return ">3"
+    endif
+    if getline(v:lnum) =~ '^==== .*$'
+        return ">4"
+    endif
+    if getline(v:lnum) =~ '^===== .*$'
+        return ">5"
+    endif
+    if getline(v:lnum) =~ '^====== .*$'
+        return ">6"
+    endif
+    return "=" 
+endfunction
+
+au BufEnter *.ascii setlocal foldexpr=MarkdownLevel()  
+au BufEnter *.ascii setlocal foldmethod=expr     
+au BufEnter *.wiki setlocal foldexpr=MarkdownLevel()  
+au BufEnter *.wiki setlocal foldmethod=expr     
