@@ -757,7 +757,7 @@ endfunction
 :ab pt pentru
 
 "  Copy in clipboard (on linux only?) up to the ending line (useful for stack traces)
-:map <silent> \y "+y$
+:map <silent> \y "+y
 
 "
 :ab ------ -------------------------------------------------------------------------------
@@ -1178,3 +1178,5 @@ au BufEnter *.ascii setlocal foldexpr=MarkdownLevel()
 au BufEnter *.ascii setlocal foldmethod=expr     
 au BufEnter *.wiki setlocal foldexpr=MarkdownLevel()  
 au BufEnter *.wiki setlocal foldmethod=expr     
+
+
