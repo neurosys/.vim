@@ -123,30 +123,31 @@
 
 " Misc
     " -------------------------------------------------------------------------------
-    " zz                  - Redraws and sets the cursor in the center of the screen
-    " g*                  - Searches for the current word, but not only as a distinct
-    "                           word but also as part of other words
-    " g#                  - Same as g* but in the opposite direction
-    " <TAB>               - Same as <C-I>
-    " g<C-g>              - Shows a detailed info about the cursor position
-    " "*y                 - Copy to clipboard
-    " "*p                 - Paste from clipboard
-    " "<capital letter>yy - Append the line yanked to register <letter>
-    " q<capital letter>   - Appends to macro recorded in register <letter>
-    " C-x C-] (insert)    - Autocomplete from the ctags file ;-)
+    " zz                    - Redraws and sets the cursor in the center of the screen
+    " g*                    - Searches for the current word, but not only as a distinct
+    "                             word but also as part of other words
+    " g#                    - Same as g* but in the opposite direction
+    " <TAB>                 - Same as <C-I>
+    " g<C-g>                - Shows a detailed info about the cursor position
+    " "*y                   - Copy to clipboard
+    " "*p                   - Paste from clipboard
+    " "<capital letter>yy   - Append the line yanked to register <letter>
+    " q<capital letter>     - Appends to macro recorded in register <letter>
+    " C-x C-] (insert)      - Autocomplete from the ctags file ;-)
     "
-    " :map                - Lists all normal mod mappings
-    " :unmap              - Removes a map made with map (Similar for the others)
-    " :verbose map        - Detailed list with all mappings for normal mode
-    " :verbose imap       - Detailed list with all mappings for insert mode
-    " :jumps              - List with all the jumps made
-    " :options            - Opens a buffer with all the current configurations
-    "                           also has small comments about them
-    "                           you can also directly edit this file at
-    "                           runtime
-    " :syntax clear       - Turns of syntax highlight (useful for speed)
+    " :map                  - Lists all normal mod mappings
+    " :unmap                - Removes a map made with map (Similar for the others)
+    " :verbose map          - Detailed list with all mappings for normal mode
+    " :verbose imap         - Detailed list with all mappings for insert mode
+    " :verbose set <option> - List with the place where that specific setting was being made
+    " :jumps                - List with all the jumps made
+    " :options              - Opens a buffer with all the current configurations
+    "                             also has small comments about them
+    "                             you can also directly edit this file at
+    "                             runtime
+    " :syntax clear         - Turns of syntax highlight (useful for speed)
     "
-    " :set scrollbind     - Scroll all the windows at the same time
+    " :set scrollbind       - Scroll all the windows at the same time
     "
     "dl"    delete character (alias: "x")       |dl|
     "diw"   delete inner word                   *diw*
@@ -470,6 +471,7 @@ set autoread
 " Attempt to determine the type of a file based on its name and possibly by
 " content
 filetype indent plugin on
+filetype plugin on
 
 " Instead of failing my commands because of unsaved info, ask for my
 " confirmation
@@ -567,28 +569,28 @@ set tags=vtags;/
 
     "set foldmethod=marker
     "foldmarker, so Vim will know where to fold
-    set foldmarker={,}
+    "set foldmarker={,}
     "folding marker, for automatic folding
     "imap <F1> 0i/* {{{ $a */
     "imap <F2> 0i/* }}} $a */
 
     " Fold based on indentation
-    set foldmethod=manual
+    "set foldmethod=manual
     "set foldmethod=marker
 
     " Open folds for the following operations
-    set foldopen=block,hor,mark,percent,quickfix,search,tag,undo
+    "set foldopen=block,hor,mark,percent,quickfix,search,tag,undo
 
     " Open / Close folds
-    nnoremap <space> zA
+    nnoremap <space> za
 
-    set foldlevelstart=2
-    set foldnestmax=4
+    "set foldlevelstart=2
+    "set foldnestmax=4
     " Extra space to the left of the number column, to show the folding level
     "set foldcolumn=4
 
     " Minimal number of lines for which folding is enabled
-    set foldminlines=4
+    "set foldminlines=4
 " <folding>
 
 
@@ -1174,9 +1176,9 @@ function! MarkdownLevel()
     return "=" 
 endfunction
 
-au BufEnter *.ascii setlocal foldexpr=MarkdownLevel()  
-au BufEnter *.ascii setlocal foldmethod=expr     
-au BufEnter *.wiki setlocal foldexpr=MarkdownLevel()  
-au BufEnter *.wiki setlocal foldmethod=expr     
+"au BufEnter *.ascii setlocal foldexpr=MarkdownLevel()  
+"au BufEnter *.ascii setlocal foldmethod=expr     
+"u BufEnter *.wiki setlocal foldexpr=MarkdownLevel()  
+"u BufEnter *.wiki setlocal foldmethod=expr     
 
 
