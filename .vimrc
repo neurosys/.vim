@@ -123,6 +123,7 @@
 
 " Misc
     " -------------------------------------------------------------------------------
+    " ga                    - shows the ascii info for the current character
     " zz                    - Redraws and sets the cursor in the center of the screen
     " g*                    - Searches for the current word, but not only as a distinct
     "                             word but also as part of other words
@@ -135,6 +136,13 @@
     " q<capital letter>     - Appends to macro recorded in register <letter>
     " C-x C-] (insert)      - Autocomplete from the ctags file ;-)
     "
+    " :e ++ff=<unxi/dos>    - Reopens the file and accepts both CRLF and CR as
+    "                         line endings
+    " :%!xxd                - Replaces the buffer with an hex representation
+    "                         of its content
+    " :%!xxd -r             - Converts from the current hex representation of
+    "                         a file to a normal binary (or text)
+    "                         representation
     " :map                  - Lists all normal mod mappings
     " :unmap                - Removes a map made with map (Similar for the others)
     " :verbose map          - Detailed list with all mappings for normal mode
@@ -145,6 +153,7 @@
     "                             also has small comments about them
     "                             you can also directly edit this file at
     "                             runtime
+    " g? (on a selection)   - Encodes / Decodes base64 the selection
     " :syntax clear         - Turns of syntax highlight (useful for speed)
     "
     " :set scrollbind       - Scroll all the windows at the same time
@@ -446,7 +455,7 @@ set expandtab
 
 " Use fast grep for searching
 ":set grepprg=fg
-set grepprg=egrep
+set grepprg=egrep\ -RHn
 
 " Ignore case when searching
 set ignorecase
