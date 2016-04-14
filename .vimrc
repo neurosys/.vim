@@ -1113,7 +1113,7 @@ let g:calendar_weeknm = 1 " 1
 
 
 if has("persistent_undo")
-    "set undodir = '/path/to/what/you/want/'
+    set undodir=$HOME/.vimundo
     set undofile
 endif
 
