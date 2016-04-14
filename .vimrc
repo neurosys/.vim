@@ -1112,10 +1112,21 @@ let g:calendar_monday = 1
 let g:calendar_weeknm = 1 " 1
 
 
-if has("persistent_undo")
-    set undodir=$HOME/.vimundo
-    set undofile
-endif
+" <Persistent Undo>
+    " Put plugins and dictionaries in this dir (also on Windows)
+    let vimDir = '$HOME/.vimundo'
+    let &runtimepath.=','.vimDir
+
+    " Keep undo history across sessions by storing it in a file
+    if has('persistent_undo')
+        let myUndoDir = expand(vimDir . '/undodir')
+        " Create dirs
+        call system('mkdir ' . vimDir)
+        call system('mkdir ' . myUndoDir)
+        let &undodir = myUndoDir
+        set undofile
+    endif
+" </Persistent Undo>
 
 
 let g:ackprg="ack"
