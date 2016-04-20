@@ -596,7 +596,15 @@ set tags=vtags;/
     let vimwiki_folding=0
 
     "let g:vimwiki_list = [{'path': 'C:/Documents and Settings/camza.AYADOM/vimwiki/'}]
-    "let g:vimwiki_list = [{'path': '~/.vimwiki/'}]
+    " markdown options are = default, markdown and media
+    "let g:vimwiki_list = [{'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': 'wiki'}]
+
+    let wiki = {}
+    let wiki.path = '~/.vimwiki/'
+    let wiki.syntax = 'default'
+    let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+    let wiki.auto_tags = 0
+    let g:vimwiki_list = [wiki]
     " ????
     let vimwiki_list_ignore_newline=0
 " </VimWiki settings>
@@ -1182,27 +1190,27 @@ autocmd! BufNewFile,BufRead * :syn match TodoYellow "\/\/ \<TODO2\> .*$"
 au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 
 
-function! MarkdownLevel()
-    if getline(v:lnum) =~ '^= .*$'
-        return ">1"
-    endif
-    if getline(v:lnum) =~ '^== .*$'
-        return ">2"
-    endif
-    if getline(v:lnum) =~ '^=== .*$'
-        return ">3"
-    endif
-    if getline(v:lnum) =~ '^==== .*$'
-        return ">4"
-    endif
-    if getline(v:lnum) =~ '^===== .*$'
-        return ">5"
-    endif
-    if getline(v:lnum) =~ '^====== .*$'
-        return ">6"
-    endif
-    return "=" 
-endfunction
+"function! MarkdownLevel()
+"    if getline(v:lnum) =~ '^= .*$'
+"        return ">1"
+"    endif
+"    if getline(v:lnum) =~ '^== .*$'
+"        return ">2"
+"    endif
+"    if getline(v:lnum) =~ '^=== .*$'
+"        return ">3"
+"    endif
+"    if getline(v:lnum) =~ '^==== .*$'
+"        return ">4"
+"    endif
+"    if getline(v:lnum) =~ '^===== .*$'
+"        return ">5"
+"    endif
+"    if getline(v:lnum) =~ '^====== .*$'
+"        return ">6"
+"    endif
+"    return "=" 
+"endfunction
 
 "au BufEnter *.ascii setlocal foldexpr=MarkdownLevel()  
 "au BufEnter *.ascii setlocal foldmethod=expr     
