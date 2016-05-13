@@ -1129,7 +1129,7 @@ let g:calendar_weeknm = 1 " 1
 
     " Make a backup of the original file, if <filename>.original_file doesn't
     " exists it's created, if it does, it goes on with <filename>~ files
-    :set patchmode=.original_file
+    ":set patchmode=.original_file
 " </backup zone>
 
 " <Persistent Undo>
