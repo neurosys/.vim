@@ -600,7 +600,7 @@ set tags=vtags;/
     "let g:vimwiki_list = [{'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': 'wiki'}]
 
     let wiki = {}
-    let wiki.path = '~/.vimwiki/'
+    let wiki.path = '~/vimwiki/'
     let wiki.syntax = 'default'
     let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
     let wiki.auto_tags = 0
