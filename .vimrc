@@ -555,21 +555,6 @@ set tags=vtags;/
 "autocmd BufRead,BufNew *.c,*.C,*.h,*.H,*.cpp,*.CPP,*.hpp,*.HPP syn match       cOperator       "[^/*]/[^/*]"
 " </in c match these operators too>
 
-" <backup zone>
-    " No persistent backup
-    :set nobackup
-
-    " Make a backup before overwriting a file, after overwriting succeeds, remove backup
-    :set writebackup
-
-    " Write a backup file for each change we make in the file (triggered at :w)
-    " XXX DANGEROUS XXX after 30 minutes of work, you could end up with lots of files
-    "au BufWritePre * let &bex = '-' . strftime("%Y-%m%d_%H-%M-%S") . '.vimbackup'
-
-    " Make a backup of the original file, if <filename>.original_file doesn't
-    " exists it's created, if it does, it goes on with <filename>~ files
-    ":set patchmode=.original_file
-" </backup zone>
 
 " <folding>
     " Stop folding
@@ -615,7 +600,7 @@ set tags=vtags;/
     "let g:vimwiki_list = [{'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': 'wiki'}]
 
     let wiki = {}
-    let wiki.path = '~/.vimwiki/'
+    let wiki.path = '~/vimwiki/'
     let wiki.syntax = 'default'
     let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
     let wiki.auto_tags = 0
@@ -1119,17 +1104,40 @@ let g:calendar_monday = 1
 " Show week number
 let g:calendar_weeknm = 1 " 1
 
+" <folders>
+    let vimDir = '$HOME/.vimstuff'
+    " Put plugins and dictionaries in this dir (also on Windows)
+    "let &runtimepath.=','.vimDir
+    call system('mkdir ' . vimDir)
+" </folders>
+
+" <backup zone>
+    " Write a backup file for each change we make in the file (triggered at :w)
+    " XXX DANGEROUS XXX after 30 minutes of work, you could end up with lots of files
+    "au BufWritePre * let &bex = '-' . strftime("%Y-%m%d_%H-%M-%S") . '.vimbackup'
+
+
+    let myBackupsDir = expand(vimDir . '/backups')
+    call system('mkdir ' . myBackupsDir)
+    let &backupdir = myBackupsDir
+
+    " No persistent backup
+    :set backup
+
+    " Make a backup before overwriting a file, after overwriting succeeds, remove backup
+    :set writebackup
+
+    " Make a backup of the original file, if <filename>.original_file doesn't
+    " exists it's created, if it does, it goes on with <filename>~ files
+    ":set patchmode=.original_file
+" </backup zone>
 
 " <Persistent Undo>
-    " Put plugins and dictionaries in this dir (also on Windows)
-    let vimDir = '$HOME/.vimundo'
-    let &runtimepath.=','.vimDir
 
     " Keep undo history across sessions by storing it in a file
     if has('persistent_undo')
         let myUndoDir = expand(vimDir . '/undodir')
         " Create dirs
-        call system('mkdir ' . vimDir)
         call system('mkdir ' . myUndoDir)
         let &undodir = myUndoDir
         set undofile

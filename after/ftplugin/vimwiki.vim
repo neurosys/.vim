@@ -26,7 +26,11 @@ setlocal foldlevelstart=2
 setlocal foldnestmax=2
 setlocal foldexpr=Foldxpr_wiki()
 setlocal syn=asciidoc
-color molokai
+if has("gui")
+    color molokai
+else
+    color monokain
+endif
 "setlocal foldcolumn=0
 "setlocal foldlevel=0
 setlocal foldminlines=4
