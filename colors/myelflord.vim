@@ -1,8 +1,26 @@
 " local syntax file - set colors on a per-machine basis:
 " vim: tw=0 ts=4 sw=4
 " Vim color file
-" Maintainer:   Ron Aaron <ron@ronware.org>
-" Last Change:  2003 May 02
+" Maintainer:   NeuroSys, based on elflord by Ron Aaron <ron@ronware.org>
+
+" Available terminal colors:
+" - Black
+" - DarkBlue
+" - DarkGreen
+" - DarkCyan
+" - DarkRed
+" - DarkMagenta
+" - Brown, DarkYellow
+" - LightGray, LightGrey, Gray, Grey
+" - DarkGray, DarkGrey
+" - Blue, LightBlue
+" - Green, LightGreen
+" - Cyan, LightCyan
+" - Red, LightRed
+" - Magenta, LightMagenta
+" - Yellow, LightYellow
+" - White
+
 
 set background=dark
 hi clear
@@ -25,6 +43,14 @@ hi Operator                      ctermfg=Red                         guifg=Red
 hi Ignore                        ctermfg=black                       guifg=bg
 hi Error       term=reverse      ctermbg=Red           ctermfg=White guibg=Red     guifg=White
 hi Todo        term=standout     ctermbg=Yellow        ctermfg=Black guifg=Blue    guibg=Yellow
+
+
+" Custom dynamic highlighting classes
+hi 1match      term=standout     ctermbg=White         ctermfg=DarkBlue guifg=Blue    guibg=Yellow
+hi 2match      term=standout     ctermbg=Blue          ctermfg=White    guifg=Blue    guibg=Yellow
+hi 3match      term=standout     ctermbg=Green         ctermfg=Black    guifg=Blue    guibg=Yellow
+hi 4match      term=standout     ctermbg=Red           ctermfg=White    guifg=Blue    guibg=Yellow
+hi 5match      term=standout     ctermbg=Cyan          ctermfg=Brown    guifg=Blue    guibg=Yellow
 
 " Common groups that link to default highlighting.
 " You can specify other highlighting easily.

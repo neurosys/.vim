@@ -290,7 +290,7 @@ if has("gui")
     "color elflord
     "color slate
     "color molokai
-    color elflord
+    color myelflord
 
     " Suggest use of collors that look good on white backgrounds
     "set background=light
@@ -338,7 +338,7 @@ else
     "color colorzone
     "color darkdot
     "color devbox-dark-256 " merge bine cu AirlineTheme bubblegum
-    color elflord
+    color myelflord
 endif
 
 " Windows
@@ -381,62 +381,10 @@ set ruler
 " Remove all the existing autocmds (useful when you re-source .vimrc)
 :autocmd!
 
-" define custom colors for things
-"if !exists("autocmd_colorscheme_loaded")
-"    let autocmd_colorscheme_loaded = 1
-"
-"    autocmd ColorScheme * highlight TodoRed         ctermbg=DarkGreen   guibg=#002b37 ctermfg=LightRed     guifg=#E01B1B
-"    autocmd ColorScheme * highlight TodoOrange      ctermbg=DarkGreen   guibg=#002b37 ctermfg=LightMagenta guifg=#E0841B
-"    autocmd ColorScheme * highlight TodoYellow      ctermbg=DarkGreen   guibg=#002b37 ctermfg=LightYellow  guifg=#E0D91B
-"    autocmd ColorScheme * highlight MyTodo          ctermbg=LightGrey   guibg=#002b37 ctermfg=LightYellow  guifg=#E0D91B
-"
-"    autocmd ColorScheme * highlight match           ctermbg=White       guibg=White   ctermfg=DarkBlue     guifg=DarkBlue
-"    autocmd ColorScheme * highlight 2match          ctermbg=Blue        guibg=Blue    ctermfg=White        guifg=White
-"    autocmd ColorScheme * highlight 3match          ctermbg=Green       guibg=Green   ctermfg=Black        guifg=Black
-"
-"    " Used to highlight redundant white spaces and tabs at the end of the line            
+" Used to highlight redundant white spaces and tabs at the end of the line            
 autocmd ColorScheme * highlight RedundantSpaces ctermbg=DarkMagenta guibg=#DfD090
 "endif
-" Available terminal colors:
-" - Black
-" - DarkBlue
-" - DarkGreen
-" - DarkCyan
-" - DarkRed
-" - DarkMagenta
-" - Brown, DarkYellow
-" - LightGray, LightGrey, Gray, Grey
-" - DarkGray, DarkGrey
-" - Blue, LightBlue
-" - Green, LightGreen
-" - Cyan, LightCyan
-" - Red, LightRed
-" - Magenta, LightMagenta
-" - Yellow, LightYellow
-" - White
 
-
-
-" Define a set of todos, based on the custom colorschemes
-
-" TODO
-" TODO1
-" TODO2
-" TODO3
-
-"if has("autocmd")
-"    if v:version > 701
-"        autocmd Syntax * call matchadd('TodoRed',  '\W\zs\(TODO1\)')
-"        autocmd Syntax * call matchadd('TodoOrange', '\W\zs\(TODO2\)')
-"        autocmd Syntax * call matchadd('ToDoYellow', '\W\zs\(TODO3\)')
-"        autocmd Syntax * call matchadd('MyTodo', '\W\zs\(elflord\)')
-"
-"        autocmd Syntax * call matchadd('match',  '\(TODO1\)')
-"        autocmd Syntax * call matchadd('2match', '\(TODO2\)')
-"        autocmd Syntax * call matchadd('3match', '\(TODO3\)')
-"        "autocmd Syntax * call matchadd('3match', '\W\zs\(TODO3\)')
-"    endif
-"endif
 
 " Do not wrap lines (useful in 60% cases, very annoying in rest)
 set nowrap
@@ -633,16 +581,34 @@ set tags=vtags;/
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" emacs like command line movements
+" emacs like movements in command line and insert mode
 " <emacs>
     :cnoremap <C-a>  <Home>
+    :inoremap <C-a>  <Esc>I
+
     :cnoremap <C-b>  <Left>
+    :inoremap <C-b>  <Esc>hi
+
     :cnoremap <C-f>  <Right>
+    :inoremap <C-f>  <Esc>a
+
     :cnoremap <C-d>  <Delete>
+    :inoremap <C-d>  <Delete>
+
+    :inoremap <C-w>  <Esc>diWi
+
     :cnoremap <M-b>  <S-Left>
+    :inoremap <M-b>  <Esc>Bi
+
     :cnoremap <M-f>  <S-Right>
+    :inoremap <M-f>  <Esc>W
+
     :cnoremap <M-d>  <S-right><Delete>
+    :inoremap <M-d>  <Esc>dW
+
     :cnoremap <Esc>b <S-Left>
+    :inoremap <Esc>b <S-Left>
+
     :cnoremap <Esc>f <S-Right>
     :cnoremap <Esc>d <S-right><Delete>
     :cnoremap <C-g>  <C-c>
@@ -744,17 +710,15 @@ endfunction
 :map <C-l> :lne<Enter>
 :map! <C-l> <Esc>:lne<Enter>
 
-:map <silent> \gc :tab split<Enter>:lgrep <C-R>=expand("<cword>")<CR> --include=*.cpp . <Enter>
-:map <silent> \gh :tab split<Enter>:lgrep <C-R>=expand("<cword>")<CR> --include=*.h . <Enter>
+" This assumes zsh shell (for bash, remove the '\\' from before '*' 
+:map <silent> \gc :tab split<Enter>:lgrep <C-R>=expand("<cword>")<CR> --include=\*.cpp . <Enter>
+:map <silent> \gh :tab split<Enter>:lgrep <C-R>=expand("<cword>")<CR> --include=\*.h . <Enter>
 :map <silent> \ga :tab split<Enter>:lgrep -I --exclude-dir=.svn --exclude-dir=.git --exclude=vtags --exclude=cscope.* --exclude=*.svn-base <C-R>=expand("<cword>")<CR> . <Enter>
 
 :map <silent> \s :tab split<Enter>
 " Jump to previous result in the quickfix list
 ":map <F9> :cp<Enter>
 ":map! <F9> <Esc>:cp<Enter>
-
-:map <silent> \m :Msearch add /<C-R>=expand("<cword>")<CR>/<Enter>
-: map <silent> \mm :Msearch! delete<Enter>
 
 :vmap <silent> \j :! par -j 80<Enter>
 " <abbreviations>
@@ -802,6 +766,9 @@ endfunction
 " Because of accidental :W, let's set it as an alias to :w
 nmap :W :w
 
+" :Tabe is one of my usual typos, can't correct behavior so let's tolerate it
+nmap :Tabe :tabe
+
 " ZZ is not the way I like to exit vim (i use zz to redraw the screen)
 map ZZ zz
 
@@ -817,10 +784,25 @@ map ZZ zz
 ":map <F9> :! chmod +w %<Enter>
 ":imap <F9> <Esc>:! chmod +w %<Enter>
 
-:map <F1> :tab split<Enter>
-:imap <F1> :tab split<Enter>
+" Dynamic highlighting for 3 classes
+:map <silent> \m1 :call matchadd('1match', '\<'.expand("<cword>").'\>')<Enter>
+:map <silent> \M1 :call matchadd('1match', expand("<cword>"))<Enter>
 
+:map <silent> \m2 :call matchadd('2match', '\<'.expand("<cword>").'\>')<Enter>
+:map <silent> \M2 :call matchadd('3match', expand("<cword>"))<Enter>
 
+:map <silent> \m3 :call matchadd('3match', '\<'.expand("<cword>").'\>')<Enter>
+:map <silent> \M3 :call matchadd('3match', expand("<cword>"))<Enter>
+
+:map <silent> \m4 :call matchadd('4match', '\<'.expand("<cword>").'\>')<Enter>
+:map <silent> \M4 :call matchadd('4match', expand("<cword>"))<Enter>
+
+:map <silent> \m5 :call matchadd('5match', '\<'.expand("<cword>").'\>')<Enter>
+:map <silent> \M5 :call matchadd('5match', expand("<cword>"))<Enter>
+
+:map <silent> \mm :call clearmatches()<Enter>
+
+" Launch the fuzzyfinder
 :map <silent> \f :FufCoverageFile<Enter>
 
 
@@ -917,9 +899,6 @@ if !exists(":DiffOrig")
           \ | wincmd p | diffthis
 endif
 
-" Taste libere de contract
-" Q - pare sa fie asignat by default cu gq, adica sa sparga linia la
-"   dimensiunea de 80 de caractere
 
 " python << EOF
 " import vim
@@ -1149,40 +1128,6 @@ let g:ackprg="ack"
 let g:ack_default_options=" -H --nocolor --nogroup --column"
 
 
-
-function! CustomSyntaxOperatorHighlight()
-    syntax keyword Boolean true false NULL TRUE FALSE
-    syntax keyword Statement namespace stderr stdin stdout new this delete
-
-    syntax match _Block "[{}]"
-    syntax match _Bracket "[\[\]]"
-    syntax match _Operator "[-+&|<>=!\/~.,;:*%&^?(){}]"
-    syntax region _Comment start="\/\*" end="\*\/"
-    syntax match _Comment "\/\/.*$"
-
-    hi _Block guifg=yellow1 guibg=NONE gui=none
-    hi link _Bracket Constant
-    hi link _Operator Operator
-    hi link _Comment Comment
-endfunction
-
-autocmd! FileType c,cpp,java,php,cs,javascript call CustomSyntaxOperatorHighlight()
-
-if has("gui")
-    hi TodoRed guifg=Black guibg=Red gui=none
-    hi TodoYellow guifg=Black guibg=Yellow gui=none
-    hi TodoBlue guifg=Black guibg=DarkBlue gui=none
-else
-    hi TodoRed ctermfg=Black ctermbg=Red
-    "hi TodoRed ctermfg=Red ctermbg=Black
-    hi TodoYellow ctermfg=Black ctermbg=DarkMagenta
-    hi TodoBlue ctermfg=Black ctermbg=Blue
-    "hi tchar_type ctermfg=Blue ctermbg=red
-endif
-autocmd! BufNewFile,BufRead * :syn match TodoRed "\<TODO1\>"
-autocmd! BufNewFile,BufRead * :syn match TodoYellow "\/\/ \<TODO2\> .*$"
-"autocmd! BufNewFile,BufRead * :syn match TodoBlue display "\/\/ \<TODO3\>"
-
 " Test to see if I can hide markdown syntax
 :set conceallevel=2
 
@@ -1190,31 +1135,19 @@ autocmd! BufNewFile,BufRead * :syn match TodoYellow "\/\/ \<TODO2\> .*$"
 au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 
 
-"function! MarkdownLevel()
-"    if getline(v:lnum) =~ '^= .*$'
-"        return ">1"
-"    endif
-"    if getline(v:lnum) =~ '^== .*$'
-"        return ">2"
-"    endif
-"    if getline(v:lnum) =~ '^=== .*$'
-"        return ">3"
-"    endif
-"    if getline(v:lnum) =~ '^==== .*$'
-"        return ">4"
-"    endif
-"    if getline(v:lnum) =~ '^===== .*$'
-"        return ">5"
-"    endif
-"    if getline(v:lnum) =~ '^====== .*$'
-"        return ">6"
-"    endif
-"    return "=" 
-"endfunction
+function! TraceThis()
+python << EOF
+import vim
+def PyFunction():
+    print("Bibi")
 
-"au BufEnter *.ascii setlocal foldexpr=MarkdownLevel()  
-"au BufEnter *.ascii setlocal foldmethod=expr     
-"u BufEnter *.wiki setlocal foldexpr=MarkdownLevel()  
-"u BufEnter *.wiki setlocal foldmethod=expr     
+# get the name of the current file
+cfile = vim.current.buffer.name
+cursor_y, cursor_x = vim.current.window.cursor
+print("Bibi " + cfile)
 
 
+PyFunction()
+EOF
+endfunction
+map <silent> \q :call TraceThis()<Enter>
