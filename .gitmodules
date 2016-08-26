@@ -79,3 +79,6 @@
 [submodule "bundle/vim-taskwarrior"]
 	path = bundle/vim-taskwarrior
 	url = https://github.com/blindFS/vim-taskwarrior
+[submodule "bundle/vim-peekaboo"]
+	path = bundle/vim-peekaboo
+	url = https://github.com/junegunn/vim-peekaboo
