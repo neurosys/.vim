@@ -1018,6 +1018,9 @@ endif
 " and then run
 " git rm --cached bundle/<name of the submodule>
 "
+" To update the submodules
+" git submodules update --recursive
+"
 :execute pathogen#infect()
 " for more advanced stuff:
 "
