@@ -82,3 +82,6 @@
 [submodule "bundle/vim-peekaboo"]
 	path = bundle/vim-peekaboo
 	url = https://github.com/junegunn/vim-peekaboo
+[submodule "bundle/vim-grepper"]
+	path = bundle/vim-grepper
+	url = https://github.com/mhinz/vim-grepper
