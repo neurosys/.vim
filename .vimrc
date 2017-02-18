@@ -1154,3 +1154,18 @@ PyFunction()
 EOF
 endfunction
 map <silent> \q :call TraceThis()<Enter>
+
+
+
+" Pentru a afisa culorile disponibile
+" :so $VIMRUNTIME/syntax/colortest.vim
+
+
+" Testing for Java
+
+"let java_highlight_java_lang_ids=1
+"let java_highlight_all=1
+"let java_highlight_debug=1
+"let java_highlight_java=1
+let java_highlight_java_lang=1
+"let java_highlight_functions=1
