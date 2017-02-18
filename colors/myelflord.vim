@@ -38,12 +38,12 @@ hi Statement   term=bold         ctermfg=Yellow        gui=bold      guifg=#aa44
 hi PreProc     term=underline    ctermfg=LightMagenta                guifg=#ff80ff
 hi Type        term=underline    ctermfg=LightGreen                  guifg=#60ff60 gui=bold
 hi Function    cterm=bold        ctermfg=White                       guifg=White
+hi FuncDef     cterm=bold        ctermfg=Green                       guifg=White
 hi Repeat      cterm=bold        ctermfg=White                       guifg=white
 hi Operator                      ctermfg=Red                         guifg=Red
 hi Ignore                        ctermfg=black                       guifg=bg
 hi Error       term=reverse      ctermbg=Red           ctermfg=White guibg=Red     guifg=White
 hi Todo        term=standout     ctermbg=Yellow        ctermfg=Black guifg=Blue    guibg=Yellow
-
 
 " Custom dynamic highlighting classes
 hi 1match      term=standout     ctermbg=White         ctermfg=DarkBlue guifg=Blue    guibg=Yellow

@@ -1,9 +1,10 @@
 " Vim syntax file
 " Language:	Java
-" Maintainer:	Claudio Fleiner <claudio@fleiner.com>
-" URL:		http://www.fleiner.com/vim/syntax/java.vim
-" Last Change:	2012 Oct 05
-
+" Current Maintainer:	kamichidu <c.kamunagi@gmail.com>
+" Current URL:		http://github.com/vim-jp/vim-java/
+" Previous Maintainer:	Claudio Fleiner <claudio@fleiner.com>
+" Previous URL:		http://www.fleiner.com/vim/syntax/java.vim
+" Last Change:	2015 Feb 28
 " Please check :help java.vim for comments on some of the options available.
 
 " Quit when a syntax file was already loaded
@@ -30,7 +31,7 @@ endif
 
 " some characters that cannot be in a java program (outside a string)
 syn match javaError "[\\@`]"
-syn match javaError "<<<\|\.\.\|=>\|||=\|&&=\|[^-]->\|\*\/"
+syn match javaError "<<<\|\.\.\|=>\|||=\|&&=\|\*\/"
 
 syn match javaOK "\.\.\."
 
@@ -39,6 +40,41 @@ syn match   javaError2 "#\|=<"
 JavaHiLink javaError2 javaError
 
 
+syn match       javaOperator       "?"
+syn match       javaOperator       "\~"
+syn match       javaOperator       "%"
+syn match       javaOperator       "\^"
+syn match       javaOperator       "[^/*]/[^/*]"
+syn match       javaOperator       "="
+syn match       javaOperator       "+"
+syn match       javaOperator       "-"
+syn match       javaOperator       "!"
+syn match       javaOperator       ">"
+syn match       javaOperator       "<"
+syn match       javaOperator       ";" 
+syn match       javaOperator       "&" 
+syn match       javaOperator       "*" 
+syn match       javaOperator       "|" 
+syn match       javaOperator       "{" 
+syn match       javaOperator       "}" 
+syn match       javaOperator       "," 
+syn match       javaOperator       "\." 
+syn match       javaOperator       "\[" 
+syn match       javaOperator       "\]" 
+syn match       javaOperator       "(" 
+syn match       javaOperator       ")" 
+
+syn match    cCustomFunc     "\w\+\s*(" contains=javaOperator
+hi def link  cCustomFunc         Function
+
+
+"syn match    cCustomParen    "(" contains=cParen,cCppParen
+"syn match    cCustomFunc     "\w\+\s*(" contains=javaOperator
+"syn match    cCustomScope    "::"
+"syn match    cCustomClass    "\w\+\s*::" contains=cCustomScope
+
+"hi def link cCustomFunc         Function
+"hi def link cCustomClass        Function 
 
 " keyword definitions
 syn keyword javaExternal	native package
@@ -62,16 +98,14 @@ syn keyword javaClassDecl	extends implements interface
 syn match   javaTypedef		"\.\s*\<class\>"ms=s+1
 syn keyword javaClassDecl	enum
 syn match   javaClassDecl	"^class\>"
-syn match   javaClassDecl	"[^.]\s*\<class\>"ms=s+1
+"syn match   javaClassDecl	"[^.]\s*\<class\>"ms=s+1
+syn match   javaClassName	"[^.]\s*\<class\> [_a-zA-Z][a-zA-Z0-9]*\>"ms=s+1
 syn match   javaAnnotation	"@\([_$a-zA-Z][_$a-zA-Z0-9]*\.\)*[_$a-zA-Z][_$a-zA-Z0-9]*\>"
 syn match   javaClassDecl	"@interface\>"
 syn keyword javaBranch		break continue nextgroup=javaUserLabelRef skipwhite
 syn match   javaUserLabelRef	"\k\+" contained
 syn match   javaVarArg		"\.\.\."
 syn keyword javaScopeDecl	public protected private abstract
-
-syn match       javaOperator       "(" 
-syn match    cCustomFunc     "\w\+\s*(" contains=javaOperator
 
 if exists("java_highlight_java_lang_ids")
   let java_highlight_all=1
@@ -111,8 +145,8 @@ if exists("java_highlight_all")  || exists("java_highlight_java")  || exists("ja
   syn cluster javaTop add=javaLangObject
 endif
 
-if filereadable(expand("<sfile>:p:h")."/javaid.vim")
-  source <sfile>:p:h/javaid.vim
+if globpath(&runtimepath, 'syntax/javaid.vim') !=# ''
+  source syntax/javaid.vim
 endif
 
 if exists("java_space_errors")
@@ -124,7 +158,6 @@ if exists("java_space_errors")
   endif
 endif
 
-syn region	cCppParen	transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cParen,cString,@Spell
 syn region  javaLabelRegion	transparent matchgroup=javaLabel start="\<case\>" matchgroup=NONE end=":" contains=javaNumber,javaCharacter
 syn match   javaUserLabel	"^\s*[_$a-zA-Z][_$a-zA-Z0-9_]*\s*:"he=e-1 contains=javaLabel
 syn keyword javaLabel		default
@@ -157,10 +190,10 @@ JavaHiLink javaCommentCharacter javaCharacter
 
 syn cluster javaTop add=javaComment,javaLineComment
 
-if !exists("java_ignore_javadoc") && main_syntax != 'jsp'
+if !exists("java_ignore_javadoc") && main_syntax != 'jsp' && globpath(&runtimepath, 'syntax/html.vim') !=# ''
   syntax case ignore
   " syntax coloring for javadoc comments (HTML)
-  syntax include @javaHtml <sfile>:p:h/html.vim
+  syntax include @javaHtml syntax/html.vim
   unlet b:current_syntax
   " HTML enables spell checking for all text that is not in a syntax item. This
   " is wrong for Java (all identifiers would be spell-checked), so it's undone
@@ -270,17 +303,18 @@ if exists("java_mark_braces_in_parens_as_errors")
 endif
 
 " catch errors caused by wrong parenthesis
-syn region  javaParenT	transparent matchgroup=javaParen  start="("  end=")" contains=@javaTop,javaParenT1
-syn region  javaParenT1 transparent matchgroup=javaParen1 start="(" end=")" contains=@javaTop,javaParenT2 contained
-syn region  javaParenT2 transparent matchgroup=javaParen2 start="(" end=")" contains=@javaTop,javaParenT  contained
-syn match   javaParenError	 ")"
+"syn region  javaParenT	transparent matchgroup=javaParen  start="("  end=")" contains=@javaTop,javaParenT1
+"syn region  javaParenT1 transparent matchgroup=javaParen1 start="(" end=")" contains=@javaTop,javaParenT2 contained
+"syn region  javaParenT2 transparent matchgroup=javaParen2 start="(" end=")" contains=@javaTop,javaParenT  contained
+"syn match   javaParenError	 ")"
 " catch errors caused by wrong square parenthesis
-syn region  javaParenT	transparent matchgroup=javaParen  start="\["  end="\]" contains=@javaTop,javaParenT1
-syn region  javaParenT1 transparent matchgroup=javaParen1 start="\[" end="\]" contains=@javaTop,javaParenT2 contained
-syn region  javaParenT2 transparent matchgroup=javaParen2 start="\[" end="\]" contains=@javaTop,javaParenT  contained
-syn match   javaParenError	 "\]"
+"syn region  javaParenT	transparent matchgroup=javaParen  start="\["  end="\]" contains=@javaTop,javaParenT1
+"syn region  javaParenT1 transparent matchgroup=javaParen1 start="\[" end="\]" contains=@javaTop,javaParenT2 contained
+"syn region  javaParenT2 transparent matchgroup=javaParen2 start="\[" end="\]" contains=@javaTop,javaParenT  contained
+"syn match   javaParenError	 "\]"
 
 JavaHiLink javaParenError	javaError
+
 
 if !exists("java_minlines")
   let java_minlines = 10
@@ -292,7 +326,7 @@ if version >= 508 || !exists("did_java_syn_inits")
   if version < 508
     let did_java_syn_inits = 1
   endif
-  JavaHiLink javaFuncDef		Function
+  JavaHiLink javaFuncDef		FuncDef
   JavaHiLink javaVarArg			Function
   JavaHiLink javaBraces			Function
   JavaHiLink javaBranch			Conditional
@@ -306,6 +340,7 @@ if version >= 508 || !exists("did_java_syn_inits")
   JavaHiLink javaStorageClass		StorageClass
   JavaHiLink javaMethodDecl		javaStorageClass
   JavaHiLink javaClassDecl		javaStorageClass
+  JavaHiLink javaClassName		FuncDef
   JavaHiLink javaScopeDecl		javaStorageClass
   JavaHiLink javaBoolean		Boolean
   JavaHiLink javaSpecial		Special
@@ -322,7 +357,7 @@ if version >= 508 || !exists("did_java_syn_inits")
   JavaHiLink javaComment		Comment
   JavaHiLink javaDocComment		Comment
   JavaHiLink javaLineComment		Comment
-  JavaHiLink javaConstant		Constant
+  JavaHiLink javaConstant		Type
   JavaHiLink javaTypedef		Typedef
   JavaHiLink javaTodo			Todo
   JavaHiLink javaAnnotation		PreProc
@@ -342,9 +377,6 @@ if version >= 508 || !exists("did_java_syn_inits")
 endif
 
 delcommand JavaHiLink
-
-hi def link cCustomFunc         Function
-hi def link cCustomClass        Function 
 
 let b:current_syntax = "java"
 
