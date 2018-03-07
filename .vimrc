@@ -312,9 +312,9 @@ if has("gui")
         au GUIEnter * set lines=48 columns=94
         " Use a nicer font
         ":set guifont=ProggyCleanTT_CE:h12
-        :set guifont=Ubuntu_Mono:h11:cANSI
+        ":set guifont=Ubuntu_Mono:h11:cANSI
         ":set guifont=Ubuntu_Mono:h10:cANSI
-        ":set guifont=Ubuntu_Mono_derivative_Powerlin:h9:cANSI
+        :set guifont=Ubuntu_Mono_derivative_Powerlin:h18:cANSI
         "
         " Still, by default we should open inf full screen
         au GUIEnter * simalt ~x
@@ -354,6 +354,9 @@ endif
 ":set guifont=Ubuntu\ Mono\ 12
 "
 "
+
+" Use UTF8 encoding
+:set encoding=utf8
 
 " Imporove performance by reducing the redraws
 :set lazyredraw
