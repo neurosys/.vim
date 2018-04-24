@@ -730,6 +730,23 @@ endfunction
 "  Copy in clipboard (on linux only?) up to the ending line (useful for stack traces)
 :map <silent> \y "+y
 
+" Full screen
+" :map <silent> \x :simalt ~x<Enter>
+:map <silent> \x :call ToggleFullScreen()<Enter>
+let g:FullScreen=0
+
+function ToggleFullScreen()
+    if g:FullScreen==0
+        let g:FullScreen=0
+        execute "simalt ~x"
+    else
+        let g:FullScreen=1
+        execute "simalt ~r"
+    endif
+endfunction
+
+:map <silent> \c :Calendar<Enter>
+
 "
 :ab ------ -------------------------------------------------------------------------------
 :ab ====== ===============================================================================
