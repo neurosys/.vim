@@ -1063,6 +1063,7 @@ set laststatus=2
 
 " Airline can use the patched fonts to display cool effects in status bar
 let g:airline_powerline_fonts=1
+set encoding=utf8
 
 " Change how tags are displayed in tabgar
 let g:airline#extensions#tagbar#enabled = 1
