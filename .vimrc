@@ -213,6 +213,9 @@
     "           on each of the lines that contain <pattern>
     "       s/<to be replaced>/<replacement>/ replaces <to be replaced> with
     "           <replacement>
+    " ex:
+    "   g/<pattern>/y A
+    "   Adds all the lines matching <pattern> into register a
 
 " Moving windows
     " --------------------------------------------------------------------------------
