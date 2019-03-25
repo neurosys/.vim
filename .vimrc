@@ -307,7 +307,7 @@ if has("gui")
             "set guifont=Fixed\ 12
             set guifont=Liberation\ Mono\ for\ Powerline\ 12
         else
-            set guifont=Ubuntu\ Mono\ 13
+            set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
         endif
         set lines=45 columns=80
     else
@@ -1193,3 +1193,7 @@ map <silent> \q :call TraceThis()<Enter>
 "let java_highlight_java=1
 let java_highlight_java_lang=1
 "let java_highlight_functions=1
+
+" <fugitive>
+:map <silent> \gs :Gstatus<Enter>
+" </fugitive>
