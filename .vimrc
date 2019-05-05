@@ -307,6 +307,7 @@ if has("gui")
             "set guifont=Fixed\ 12
             set guifont=Liberation\ Mono\ for\ Powerline\ 12
         else
+            "set guifont=Ubuntu\ Mono\ 13
             set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
         endif
         set lines=45 columns=80
@@ -547,7 +548,12 @@ set tags=vtags;/
     let vimwiki_camel_case=0
 
     " Stop folding
-    let vimwiki_folding=0
+    " Value           Description  
+    " ''              Disable folding.  
+    " 'expr'          Folding based on expression (folds sections and code blocks).  
+    " 'syntax'        Folding based on syntax (folds sections; slower than 'expr').  
+    " 'list'          Folding based on expression (folds list subitems; much slower).
+    let vimwiki_folding=''
 
     "let g:vimwiki_list = [{'path': 'C:/Documents and Settings/camza.AYADOM/vimwiki/'}]
     " markdown options are = default, markdown and media
@@ -1043,7 +1049,13 @@ endif
 "
 " To update the submodules
 " git submodules update --recursive
-"
+
+" Disable taskwarrior module if program not present
+let g:pathogen_disabled = []
+if empty(glob("/usr/bin/task"))
+   call add(g:pathogen_disabled, 'vim-taskwarrior')
+endif
+
 :execute pathogen#infect()
 " for more advanced stuff:
 "
