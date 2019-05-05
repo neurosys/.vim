@@ -78,7 +78,7 @@
 	url = https://github.com/vim-airline/vim-airline-themes.git
 [submodule "bundle/vim-taskwarrior"]
 	path = bundle/vim-taskwarrior
-	url = https://github.com/blindFS/vim-taskwarrior
+	url = https://github.com/blindFS/vim-taskwarrior.git
 [submodule "bundle/vim-peekaboo"]
 	path = bundle/vim-peekaboo
 	url = https://github.com/junegunn/vim-peekaboo
