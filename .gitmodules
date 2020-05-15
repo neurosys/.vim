@@ -85,3 +85,6 @@
 [submodule "bundle/vim-colorschemes"]
 	path = bundle/vim-colorschemes
 	url = https://github.com/flazz/vim-colorschemes
+[submodule "bundle/govim"]
+	path = bundle/govim
+	url = https://github.com/govim/govim.git
