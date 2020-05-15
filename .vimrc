@@ -488,6 +488,7 @@ set scrolloff=0
 command Spell setlocal spell spelllang=en_us
 " You can choose suggestions for misspelled words using z=
 " Or you can add a word to your personal correctly spelled words by zg
+" ]s jump to the next misspelled word, [s to jump to previous
 
 
 " allow free form selection (i.e. ignoring line endings) in visual block mode
@@ -1209,3 +1210,9 @@ let java_highlight_java_lang=1
 " <fugitive>
 :map <silent> \gs :Gstatus<Enter>
 " </fugitive>
+"
+
+" <go-lang>
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+" </go-lang>
