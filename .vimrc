@@ -582,7 +582,7 @@ set tags=vtags;/
 
 " <NERD tree>
     ":map <silent> <F10> :NERDTreeToggle<Enter>
-    ":map <silent> \n :NERDTreeToggle<Enter>
+    :map <silent> \n :NERDTreeToggle<Enter>
 
 " <NERD tree>
 
