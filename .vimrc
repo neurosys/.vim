@@ -582,7 +582,7 @@ set tags=vtags;/
 
 " <NERD tree>
     ":map <silent> <F10> :NERDTreeToggle<Enter>
-    :map <silent> \n :NERDTreeToggle<Enter>
+    ":map <silent> \n :NERDTreeToggle<Enter>
 
 " <NERD tree>
 
@@ -1042,7 +1042,7 @@ endif
 "git submodule update --init
 "
 " To remove a submodule use:
-" git deinit -f bundle/<name of the submodule>
+" git submodule deinit -f bundle/<name of the submodule>
 "
 " Remove the entry from .gitmodule
 " and then run
@@ -1164,6 +1164,7 @@ let g:calendar_weeknm = 1 " 1
 " </Persistent Undo>
 
 
+
 let g:ackprg="ack"
 let g:ack_default_options=" -H --nocolor --nogroup --column"
 
@@ -1172,7 +1173,7 @@ let g:ack_default_options=" -H --nocolor --nogroup --column"
 :set conceallevel=2
 
 " Enable omni completion for CPP
-au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
+"au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 
 
 function! TraceThis()
@@ -1213,6 +1214,7 @@ let java_highlight_java_lang=1
 "
 
 " <go-lang>
+:map <silent> <F1> <Esc>:cwindow<Enter>
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 " </go-lang>

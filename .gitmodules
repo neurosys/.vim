@@ -88,3 +88,6 @@
 [submodule "bundle/govim"]
 	path = bundle/govim
 	url = https://github.com/govim/govim.git
+[submodule "bundle/vim-mark"]
+	path = bundle/vim-mark
+	url = https://github.com/inkarkat/vim-mark
