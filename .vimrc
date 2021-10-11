@@ -362,6 +362,9 @@ endif
 " Use UTF8 encoding
 :set encoding=utf8
 
+" Don't append a \n at the end of file even if POSIX says so
+:set nofixendofline
+
 " Imporove performance by reducing the redraws
 :set lazyredraw
 
