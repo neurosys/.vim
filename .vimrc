@@ -1173,7 +1173,7 @@ let g:ack_default_options=" -H --nocolor --nogroup --column"
 
 
 " Test to see if I can hide markdown syntax
-:set conceallevel=2
+":set conceallevel=2
 
 " Enable omni completion for CPP
 "au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
@@ -1213,11 +1213,10 @@ let java_highlight_java_lang=1
 
 " <fugitive>
 :map <silent> \gs :Gstatus<Enter>
+:map <silent> \b  :Gblame<Enter>
 " </fugitive>
 "
 
 " <go-lang>
-:map <silent> <F1> <Esc>:cwindow<Enter>
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
+" Run :GoInstallBinaries so that the plugin will grab all the dependencies
 " </go-lang>
