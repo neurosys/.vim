@@ -1212,8 +1212,8 @@ let java_highlight_java_lang=1
 "let java_highlight_functions=1
 
 " <fugitive>
-:map <silent> \gs :Gstatus<Enter>
-:map <silent> \b  :Gblame<Enter>
+:map <silent> \gs :Git<Enter>
+:map <silent> \b  :Git blame<Enter>
 " </fugitive>
 "
 
