@@ -398,6 +398,8 @@ autocmd ColorScheme * highlight RedundantSpaces ctermbg=DarkMagenta guibg=#DfD09
 
 " Do not wrap lines (useful in 60% cases, very annoying in rest)
 set nowrap
+map <silent> \l :set wrap
+
 
 " I want search highlighting on
 set hls
@@ -1212,7 +1214,7 @@ let java_highlight_java_lang=1
 "let java_highlight_functions=1
 
 " <fugitive>
-:map <silent> \gs :Git<Enter>
+:map <silent> \gs :Git status<Enter>
 :map <silent> \b  :Git blame<Enter>
 " </fugitive>
 "
