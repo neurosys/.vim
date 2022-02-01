@@ -790,7 +790,9 @@ endfunction
 
 
 " Store the name of the current function (you must be over it)
-":map <F2> :let @x='<C-R><C-W>'<Enter>
+:map <F2> :let @x='<C-R><C-W>'<Enter>:let @z=0<Enter>
+:map <F1> :let @z=@z+1<Enter>ofmt.Printf("DEXTRACE:>> <C-R>x(<C-R>z)\n")<Esc>==
+
 
 " Add #include "C:/dexdbg.h" to the current file
 ":map <F4> ggi#include "C:/dexdbg.h"<Enter><Esc>
