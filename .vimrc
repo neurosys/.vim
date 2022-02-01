@@ -398,7 +398,7 @@ autocmd ColorScheme * highlight RedundantSpaces ctermbg=DarkMagenta guibg=#DfD09
 
 " Do not wrap lines (useful in 60% cases, very annoying in rest)
 set nowrap
-map <silent> \l :set wrap
+map <silent> \l :set wrap<Enter>
 
 
 " I want search highlighting on
