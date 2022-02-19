@@ -324,7 +324,7 @@ if has("gui")
         au GUIEnter * simalt ~x
     endif
 
-    " No menu and tab bar
+    " No menu and tab bar (default egmrLtT)
     :set guioptions=
 
     " Alt-Space is System menu
@@ -560,17 +560,26 @@ set tags=vtags;/
     " 'syntax'        Folding based on syntax (folds sections; slower than 'expr').  
     " 'list'          Folding based on expression (folds list subitems; much slower).
     let vimwiki_folding=''
+    let g:vimwiki_dir_link = 'index' " automatically resolve folder links as folder/index.wiki
+    let g:vimwiki_hl_headers = 1 " highlight headers with different colors
+    let g:vimwiki_hl_cb_checked = 1 " highlight completed tasks
+    let g:vimwiki_global_ext = 0 " Don't let vimwiki consider every markdown file as a wiki
 
-    "let g:vimwiki_list = [{'path': 'C:/Documents and Settings/camza.AYADOM/vimwiki/'}]
-    " markdown options are = default, markdown and media
-    "let g:vimwiki_list = [{'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': 'wiki'}]
 
-    let wiki = {}
-    let wiki.path = '~/vimwiki/'
-    let wiki.syntax = 'default'
-    let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
-    let wiki.auto_tags = 0
-    let g:vimwiki_list = [wiki]
+
+    " Define a list of wikis (with syntax and extension for files used)
+    " syntax options are ['default', 'markdown', 'media']
+    " \ws to list the available wikis and enter them
+    let g:vimwiki_list = [{'path': '~/.vimwiki/main', 'syntax': 'markdown', 'ext': 'md'},
+                \ {'path': '~/.vimwiki/extra', 'syntax': 'markdown', 'ext': 'md'}]
+
+    "let wiki = {}
+    "let wiki.path = '~/vimwiki/'
+    ""let wiki.syntax = 'default'
+    "let wiki.syntax = 'markdown'
+    "let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+    "let wiki.auto_tags = 0
+    "let g:vimwiki_list = [wiki]
     " ????
     let vimwiki_list_ignore_newline=0
 " </VimWiki settings>
