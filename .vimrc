@@ -571,7 +571,7 @@ set tags=vtags;/
     " syntax options are ['default', 'markdown', 'media']
     " \ws to list the available wikis and enter them
     let g:vimwiki_list = [{'path': '~/.vimwiki/main', 'syntax': 'markdown', 'ext': 'md'},
-                \ {'path': '~/.vimwiki/extra', 'syntax': 'markdown', 'ext': 'md'}]
+                \ {'path': '~/.vimwiki/references', 'syntax': 'markdown', 'ext': 'md'}]
 
     "let wiki = {}
     "let wiki.path = '~/vimwiki/'
