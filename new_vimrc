@@ -1,0 +1,18 @@
+
+set nocompatible
+
+" General configuration
+source $HOME/.vim/vimrc.d/general.vim
+source $HOME/.vim/vimrc.d/aspect.vim
+source $HOME/.vim/vimrc.d/keybindings.vim
+
+source $HOME/.vim/vimrc.d/plugins.vim
+
+" Plugin configuration
+source $HOME/.vim/vimrc.d/vimwiki.vim
+source $HOME/.vim/vimrc.d/ranger.vim
+source $HOME/.vim/vimrc.d/fzf.vim
+
+source $HOME/.vim/vimrc.d/vim-airline.vim
+source $HOME/.vim/vimrc.d/fugitive.vim
+
