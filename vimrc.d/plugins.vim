@@ -79,5 +79,8 @@ Plug 'vim-airline/vim-airline'
 " https://github.com/vim-airline/vim-airline-themes
 Plug 'vim-airline/vim-airline-themes'
 
+" https://github.com/preservim/vim-markdown
+Plug 'preservim/vim-markdown'
+
 call plug#end()
 

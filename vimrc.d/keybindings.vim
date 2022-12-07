@@ -1,6 +1,7 @@
 
 " Wrap lines
-map <silent> \l :set wrap<Enter>
+" [ow to enable
+" ]ow to disable
 
 " Walk trough buffers
 :map <M-j> :bprevious<Enter>
@@ -64,7 +65,7 @@ nnoremap <space> za
     " display prototype in preview window
     "map <M-i> <C-w>}
     "map <silent> <M-i> :call TagPreviewerToggle()<Enter>
-    map <silent> \i :call TagPreviewerToggle()<Enter>
+    "map <silent> \i :call TagPreviewerToggle()<Enter>
     let g:TagPreviewerOpen=0
 
     function TagPreviewerToggle()
@@ -122,8 +123,6 @@ function ToggleFullScreen()
     endif
 endfunction
 
-:map <silent> \c :Calendar<Enter>
-
 "
 :ab ------ -------------------------------------------------------------------------------
 :ab ====== ===============================================================================
@@ -170,3 +169,51 @@ map ZZ zz
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
+
+" <vim-go>
+" available 
+:map <silent> \r :GoRename<Enter>
+" Gives a list of implementation for the function
+:map <silent> \i :GoImplements<Enter> 
+" Gives a list of who is calling this function (if called via pointer... tough luck)
+:map <silent> \c :GoCallers<Enter> 
+" Switch betwen .go and _test.go file
+:nmap <silent> \tt :map <silent> :GoAlternate<Enter>
+" Populates all fields in struct with default values
+:map <silent> \l :GoFillStruct<Enter>
+" Generates if err != nil {return...} 
+:map <silent> \n :GoIfErr 
+" IMPORTANT :GoImpl <receiver> <interface> " Generates implementation for the given interface
+"
+" :GoLint!<Enter> "Run linter for the current file (without '!' it also jumps to the first problem)
+" NOT suitable: :GoDoc <C-r>w<Enter> " Open documentation in split window (requires also the package name which C-r doesn't provide)
+" :GoInfo<Enter> " Briefly displays type info about the current word
+" :GoTest<Enter> " Run the _test.go files in current directory
+" :GoTestFunc<Enter> " Run the test for the current function
+
+" Show GoDoc in baloon
+let g:go_doc_balloon = 0
+" Show GoDoc in popup-window
+let g:go_doc_popup_window = 1
+
+" Completes from unimported packages as well. TODO Set to true as test
+let g:go_gopls_complete_unimported = v:null
+
+" Ho gopls matches for completions (fuzzy|caseSensitive)
+let g:go_gopls_matcher = v:null
+
+
+
+"#:map <silent> \tag :TagbarToggle<Enter>
+"#:map <silent> \u :UndotreeToggle<Enter>
+"#":map <silent> \n :NERDTreeToggle<Enter>
+"#    "map <silent> <M-i> :call TagPreviewerToggle()<Enter>
+"#    map <silent> \i :call TagPreviewerToggle()<Enter>
+"#:map <silent> \s :tab split<Enter>
+"#:vmap <silent> \j :! par -j 80<Enter>
+"#:map <silent> \y "+y
+"#" :map <silent> \x :simalt ~x<Enter>
+"#:map <silent> \x :call ToggleFullScreen()<Enter>
+"#:map <silent> \c :Calendar<Enter>
+"#:map <silent> \<space> :nohls<Enter>
+"#":map <silent> \f :FufCoverageFile<Enter>
