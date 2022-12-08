@@ -82,5 +82,8 @@ Plug 'vim-airline/vim-airline-themes'
 " https://github.com/preservim/vim-markdown
 Plug 'preservim/vim-markdown'
 
+" https://github.com/hashivim/vim-terraform
+Plug 'hashivim/vim-terraform'
+
 call plug#end()
 

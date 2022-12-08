@@ -12,6 +12,7 @@ source $HOME/.vim/vimrc.d/plugins.vim
 source $HOME/.vim/vimrc.d/vimwiki.vim
 source $HOME/.vim/vimrc.d/ranger.vim
 source $HOME/.vim/vimrc.d/fzf.vim
+source $HOME/.vim/vimrc.d/terraform.vim
 
 source $HOME/.vim/vimrc.d/vim-airline.vim
 source $HOME/.vim/vimrc.d/fugitive.vim
