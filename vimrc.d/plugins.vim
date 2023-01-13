@@ -62,7 +62,7 @@ Plug 'preservim/tagbar'
 Plug 'mbbill/undotree'
 
 " Plugin to list the buffers opened https://github.com/bling/vim-bufferline
-Plug 'bling/vim-bufferline'
+" Plug 'bling/vim-bufferline'
 
 " Plugin to create splits https://github.com/wellle/visual-split.vim
 Plug 'wellle/visual-split.vim'
