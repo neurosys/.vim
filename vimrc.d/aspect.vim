@@ -16,10 +16,12 @@ if has("gui")
             "set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
             "set guifont=DejaVu\ Sans\ Mono\ 12
             "set guifont=Fixed\ 12
-            set guifont=Liberation\ Mono\ for\ Powerline\ 12
+            "set guifont=Liberation\ Mono\ for\ Powerline\ 12
+            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 14
         else
             "set guifont=Ubuntu\ Mono\ 13
-            set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
+            "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
+            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 14
         endif
         set lines=45 columns=80
     else
