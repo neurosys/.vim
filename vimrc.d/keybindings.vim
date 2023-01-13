@@ -170,26 +170,78 @@ map ZZ zz
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
+:map <silent> <M-F1> :terminal<Enter>
+
 " <vim-go>
 " available 
-:map <silent> \r :GoRename<Enter>
-" Gives a list of implementation for the function
-:map <silent> \i :GoImplements<Enter> 
-" Gives a list of who is calling this function (if called via pointer... tough luck)
-:map <silent> \c :GoCallers<Enter> 
-" Switch betwen .go and _test.go file
-:nmap <silent> \tt :map <silent> :GoAlternate<Enter>
+autocmd FileType go map <silent> \r :GoRename<Enter>
+
+" Gives a list of implementations for the function
+execute "set <M-i>=\ei"
+autocmd FileType go map <silent> <M-i> :GoImplements<Enter> 
+
 " Populates all fields in struct with default values
-:map <silent> \l :GoFillStruct<Enter>
-" Generates if err != nil {return...} 
-:map <silent> \n :GoIfErr 
-" IMPORTANT :GoImpl <receiver> <interface> " Generates implementation for the given interface
-"
-" :GoLint!<Enter> "Run linter for the current file (without '!' it also jumps to the first problem)
-" NOT suitable: :GoDoc <C-r>w<Enter> " Open documentation in split window (requires also the package name which C-r doesn't provide)
-" :GoInfo<Enter> " Briefly displays type info about the current word
-" :GoTest<Enter> " Run the _test.go files in current directory
-" :GoTestFunc<Enter> " Run the test for the current function
+autocmd FileType go map <silent> \fil :GoFillStruct<Enter>
+
+" Dump variable (semi automated) must not be <silent> as we may need to edit
+" what we dump
+execute "set <M-d>=\ed"
+autocmd FileType go nmap <M-d> :GoDebugPrint <C-r><C-S-w>
+
+" Add tags to a struct
+autocmd FileType go nmap <silent> \js :GoAddTags<Enter>
+
+" Run go build
+execute "set <M-m>=\em"
+autocmd FileType go nmap <silent> <M-m> :GoBuild<Enter>
+"autocmd FileType go nmap <silent> <S-m> :GoBuild<Enter>
+
+" Run tests
+"autocmd FileType go nmap <silent> <C-S-m> :GoTest<Enter>
+execute "set <M-M>=\eM"
+autocmd FileType go nmap <silent> <M-M> :GoTest<Enter>
+
+" Run linter
+"autocmd FileType go nmap <silent> <C-S-l> :GoMetaLinter<Enter>
+"execute "set <M-l>=\el"
+"autocmd FileType go nmap <silent> <M-l> :GoMetaLinter<Enter>
+autocmd FileType go nmap <silent> \l :GoMetaLinter<Enter>
+
+" Run GoDescribe (gopls 'linter')
+execute "set <M-L>=\eL"
+autocmd FileType go nmap <silent> <M-L> :GoDescribe<Enter>
+
+" Run the current test
+execute "set <M-f>=\ef"
+autocmd FileType go map <silent> <M-f> :GoTestFunc<Enter>
+
+" Jump to the test or implementation
+autocmd FileType go nmap <silent> <S-y> :GoAlternate<Enter>
+"execute "set <M-y>=\ey"
+"autocmd FileType go map <silent> <M-y> :GoAlternate<Enter>
+
+" Gives a list of who is calling this function (if called via pointer... tough luck)
+"autocmd FileType go map <silent> <C-c> :GoCallers<Enter> 
+execute "set <M-c>=\ec"
+autocmd FileType go map <silent> <M-c> :GoCallers<Enter>
+
+" Insert error handling (works in insert mode)
+execute "set <M-e>=\ee"
+autocmd FileType go imap <silent> <M-e> <Esc>:GoIfErr<Enter>kkA
+
+" Insert error handling (works in insert mode)
+execute "set <M-q>=\eq"
+"autocmd FileType go map <silent> <M-q> :GoDebugStop<Enter>
+autocmd FileType go map <silent> <M-q> :call StopDebugProfile()<Enter>
+
+"" IMPORTANT :GoImpl <receiver> <interface> " Generates implementation for the given interface
+
+autocmd FileType go nmap <silent> \dd1 :call RunDebugProfile(1)<Enter>
+"autocmd FileType go nmap <silent> \dd1 :MyGoDebug1<Enter>
+"autocmd FileType go nmap <silent> \dd2 :GoDebugStart <params> <Enter>
+"autocmd FileType go nmap <silent> \dd3 :GoDebugStart <params> <Enter>
+autocmd FileType go nmap <silent> \dt :call GoDebugTestFunc<Enter>
+
 
 " Show GoDoc in baloon
 let g:go_doc_balloon = 0
@@ -202,7 +254,23 @@ let g:go_gopls_complete_unimported = v:null
 " Ho gopls matches for completions (fuzzy|caseSensitive)
 let g:go_gopls_matcher = v:null
 
+" Automatically (in theory) highlight identifiers of same type as the one
+" under cursor
+let g:go_auto_sameids = 1
 
+" Allows you to see diagnostics from gopls using
+" :GoDiagnostics
+let g:go_diagnostics_enabled = 1
+
+" Not entirely sure what it does... yet
+let g:go_auto_type_info = 1
+
+"\ 'goroutines': 'leftbelow 10new',
+let g:go_debug_windows = {
+      \ 'vars':       'rightbelow 60vnew',
+      \ 'stack':      'leftabove 10new',
+      \ 'out':        'botright 10new',
+\ }
 
 "#:map <silent> \tag :TagbarToggle<Enter>
 "#:map <silent> \u :UndotreeToggle<Enter>
@@ -217,3 +285,139 @@ let g:go_gopls_matcher = v:null
 "#:map <silent> \c :Calendar<Enter>
 "#:map <silent> \<space> :nohls<Enter>
 "#":map <silent> \f :FufCoverageFile<Enter>
+
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+function RunDebugProfile(profileNumber)
+    " todo try for other paths for .envrc, not just ./
+    let rawProfile = readfile(".envrc")
+    let prefix = "#+vim-go:"
+    let prefixLength = len(prefix)
+    let profilesLines = []
+
+    " Extract the profile(s)
+    for line in rawProfile
+        " Ignore everything that doesn't have the prefix
+        if line[0:prefixLength-1] != prefix
+            continue
+        endif
+
+        " Remove the prefix from each line
+        let profileLine = substitute(line, prefix, "", "")
+        call add(profilesLines, profileLine)
+    endfor
+    echo profilesLines
+
+    let keywordProfile = "profile:"
+    let keywordCmd = "cmd:"
+    let keywordEnv = "env:"
+
+    let profiles = []
+    let profile = {"name": "", "cmd": [], "env": {}}
+
+    let tmpProfile = {}
+    
+    for pLine in profilesLines
+        echo "Begin =================================================================================="
+        echo pLine
+        echo tmpProfile
+        echo profiles
+
+        " Check to see if we're in the begining of the profile
+        " a profile always starts with 'profile:<name>'
+        if pLine[0:len(keywordProfile)-1] == keywordProfile
+            echo "DEXTRACE:>> (1) Found profile"
+            if has_key(tmpProfile, "name") != 0 && has_key(tmpProfile, "cmd") != 0
+                echo "DEXTRACE:>> (2) Profile name not empty"
+                call add(profiles, tmpProfile)
+                let tmpProfile = {}
+            endif
+
+            echo "DEXTRACE:>> (3) Profile name empty"
+            let name = split(pLine, ":")[1]
+            let tmpProfile["name"] = name
+            echo name
+            echo tmpProfile
+            echo "DEXTRACE:>> (4) End of profile section"
+            continue
+
+        endif
+
+        " Check to see if the line starts withthe profile name
+        " ignore otherwise as we don't know what to do with it
+        if pLine[0:len(tmpProfile["name"])-1] != tmpProfile["name"]
+            continue
+        endif
+
+        " Remove the profile name prefix as we don't need it from now on
+        let contentLine = substitute(pLine, tmpProfile["name"] . ":", "", "")
+
+        echo "DEXTRACE:>> " . contentLine
+
+        " If we're here it means we're inside of a profile
+        
+        if contentLine[0:len(keywordCmd)-1] == keywordCmd
+            echo "DEXTRACE:>> (5) Found cmd"
+            let cmd = split(contentLine[len(keywordCmd):], ",")
+            let tmpProfile["cmd"] = cmd
+            continue
+        endif
+
+        echo "DEXTRACE:>> (6) End of cmd"
+
+        if contentLine[0:len(keywordEnv)-1] == keywordEnv
+            echo "DEXTRACE:>> (7) Found env"
+            let envPair = split(contentLine[len(keywordEnv):], "=")
+            let pair = {envPair[0]: envPair[1]}
+            if has_key(tmpProfile, "env") == 0
+                let tmpProfile["env"] = []
+            endif
+            call add(tmpProfile["env"], pair)
+        endif
+        echo "DEXTRACE:>> (8) End of loop"
+    endfor
+
+    if has_key(tmpProfile, "name") != 0 && has_key(tmpProfile, "cmd") != 0
+        call add(profiles, tmpProfile)
+    endif
+    echo profiles
+
+
+    let chosenProfile = profiles[a:profileNumber]
+    let g:myActiveDebugProfile = chosenProfile
+    if has_key(chosenProfile, "env") != 0
+        for envVar in chosenProfile["env"]
+            for envKey in keys(envVar)
+                let exportCmd = "let $" . envKey . '="' . envVar[envKey] . '"'
+                echo exportCmd
+                execute(exportCmd)
+            endfor
+        endfor
+    endif
+
+    call call('go#debug#Start', extend(['debug', '.'], chosenProfile["cmd"]))
+endfunction
+
+func StopDebugProfile()
+    call go#debug#Stop()
+    let dbgProfile = g:myActiveDebugProfile
+    if has_key(dbgProfile, "env") != 0
+        for envVar in dbgProfile["env"]
+            for envKey in keys(envVar)
+                let exportCmd = "unlet $" . envKey
+                echo exportCmd
+                execute(exportCmd)
+            endfor
+        endfor
+    endif
+endfunction
