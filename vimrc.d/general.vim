@@ -126,7 +126,7 @@ set virtualedit+=block
 ":cs add cscope.out
 
 " Look for the tags file, up in the folder hierarchy
-set tags=vtags;/
+set tags=tags;/
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
