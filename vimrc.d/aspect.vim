@@ -51,7 +51,7 @@ if has("gui")
 else
     " Suggest use of colors that look good on dark backgrounds
     set background=dark
-    set term=$TERM
+    "set term=$TERM
     "color colorzone
     "color darkdot
     "color devbox-dark-256 " merge bine cu AirlineTheme bubblegum

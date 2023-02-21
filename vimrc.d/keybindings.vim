@@ -177,43 +177,47 @@ map Q gq
 autocmd FileType go map <silent> \r :GoRename<Enter>
 
 " Gives a list of implementations for the function
-execute "set <M-i>=\ei"
-autocmd FileType go map <silent> <M-i> :GoImplements<Enter> 
+"#execute "set <M-i>=\ei"
+"#autocmd FileType go map <silent> <M-i> :GoImplements<Enter> 
+autocmd FileType go map <silent> \i :GoImplements<Enter> 
 
 " Populates all fields in struct with default values
 autocmd FileType go map <silent> \fil :GoFillStruct<Enter>
 
 " Dump variable (semi automated) must not be <silent> as we may need to edit
 " what we dump
-execute "set <M-d>=\ed"
-autocmd FileType go nmap <M-d> :GoDebugPrint <C-r><C-S-w>
+"execute "set <M-d>=\ed"
+"autocmd FileType go nmap <M-d> :GoDebugPrint <C-r><C-S-w>
+autocmd FileType go nmap \dd :GoDebugPrint <C-r><C-S-w>
 
 " Add tags to a struct
 autocmd FileType go nmap <silent> \js :GoAddTags<Enter>
 
 " Run go build
-execute "set <M-m>=\em"
-autocmd FileType go nmap <silent> <M-m> :GoBuild<Enter>
+"xx# execute "set <M-m>=\em"
+"xx# autocmd FileType go nmap <silent> <M-m> :GoBuild<Enter>
 "autocmd FileType go nmap <silent> <S-m> :GoBuild<Enter>
+autocmd FileType go nmap <silent> <C-S-m> :GoBuild<Enter>
 
 " Run tests
 "autocmd FileType go nmap <silent> <C-S-m> :GoTest<Enter>
-execute "set <M-M>=\eM"
-autocmd FileType go nmap <silent> <M-M> :GoTest<Enter>
+"xx# execute "set <M-M>=\eM"
+"xx# autocmd FileType go nmap <silent> <M-M> :GoTest<Enter>
 
 " Run linter
 "autocmd FileType go nmap <silent> <C-S-l> :GoMetaLinter<Enter>
 "execute "set <M-l>=\el"
 "autocmd FileType go nmap <silent> <M-l> :GoMetaLinter<Enter>
-autocmd FileType go nmap <silent> \l :GoMetaLinter<Enter>
+"autocmd FileType go nmap <silent> \l :GoMetaLinter<Enter>
 
 " Run GoDescribe (gopls 'linter')
-execute "set <M-L>=\eL"
-autocmd FileType go nmap <silent> <M-L> :GoDescribe<Enter>
+"xx# execute "set <M-L>=\eL"
+"xx# autocmd FileType go nmap <silent> <M-L> :GoDescribe<Enter>
 
 " Run the current test
-execute "set <M-f>=\ef"
-autocmd FileType go map <silent> <M-f> :GoTestFunc<Enter>
+"xx# execute "set <M-f>=\ef"
+"xx# autocmd FileType go map <silent> <M-f> :GoTestFunc<Enter>
+autocmd FileType go map <silent> \tf :GoTestFunc<Enter>
 
 " Jump to the test or implementation
 autocmd FileType go nmap <silent> <S-y> :GoAlternate<Enter>
@@ -222,24 +226,27 @@ autocmd FileType go nmap <silent> <S-y> :GoAlternate<Enter>
 
 " Gives a list of who is calling this function (if called via pointer... tough luck)
 "autocmd FileType go map <silent> <C-c> :GoCallers<Enter> 
-execute "set <M-c>=\ec"
-autocmd FileType go map <silent> <M-c> :GoCallers<Enter>
+"execute "set <M-c>=\ec"
+"autocmd FileType go map <silent> <M-c> :GoCallers<Enter>
+autocmd FileType go map <silent> \l :GoCallers<Enter>
 
 " Insert error handling (works in insert mode)
-execute "set <M-e>=\ee"
-autocmd FileType go imap <silent> <M-e> <Esc>:GoIfErr<Enter>kkA
+"execute "set <M-e>=\ee"
+"autocmd FileType go imap <silent> <M-e> <Esc>:GoIfErr<Enter>kkA
+autocmd FileType go imap <silent> \e <Esc>:GoIfErr<Enter>kkA
 
 " Insert error handling (works in insert mode)
-execute "set <M-q>=\eq"
+"execute "set <M-q>=\eq"
 "autocmd FileType go map <silent> <M-q> :GoDebugStop<Enter>
-autocmd FileType go map <silent> <M-q> :call StopDebugProfile()<Enter>
+"autocmd FileType go map <silent> <M-q> :call StopDebugProfile()<Enter>
+autocmd FileType go map <silent> \q :call StopDebugProfile()<Enter>
 
 "" IMPORTANT :GoImpl <receiver> <interface> " Generates implementation for the given interface
 
-autocmd FileType go nmap <silent> \dd1 :call RunDebugProfile(1)<Enter>
-"autocmd FileType go nmap <silent> \dd1 :MyGoDebug1<Enter>
-"autocmd FileType go nmap <silent> \dd2 :GoDebugStart <params> <Enter>
-"autocmd FileType go nmap <silent> \dd3 :GoDebugStart <params> <Enter>
+autocmd FileType go nmap <silent> \d1 :call RunDebugProfile(1)<Enter>
+"autocmd FileType go nmap <silent> \d1 :MyGoDebug1<Enter>
+"autocmd FileType go nmap <silent> \d2 :GoDebugStart <params> <Enter>
+"autocmd FileType go nmap <silent> \d3 :GoDebugStart <params> <Enter>
 autocmd FileType go nmap <silent> \dt :call GoDebugTestFunc<Enter>
 
 
@@ -249,10 +256,14 @@ let g:go_doc_balloon = 0
 let g:go_doc_popup_window = 1
 
 " Completes from unimported packages as well. TODO Set to true as test
-let g:go_gopls_complete_unimported = v:null
+" let g:go_gopls_complete_unimported = v:null
+let g:go_gopls_complete_unimported = 1
 
 " Ho gopls matches for completions (fuzzy|caseSensitive)
-let g:go_gopls_matcher = v:null
+"let g:go_gopls_matcher = v:null
+let g:go_gopls_matcher = "fuzzy"
+
+let g:go_gopls_deep_completion = 1
 
 " Automatically (in theory) highlight identifiers of same type as the one
 " under cursor
@@ -263,7 +274,10 @@ let g:go_auto_sameids = 1
 let g:go_diagnostics_enabled = 1
 
 " Not entirely sure what it does... yet
-let g:go_auto_type_info = 1
+let g:go_auto_type_info = 0
+
+let g:go_decls_includes = 'func,type'
+let g:go_decls_mode = 'fzf'
 
 "\ 'goroutines': 'leftbelow 10new',
 let g:go_debug_windows = {
@@ -316,7 +330,7 @@ function RunDebugProfile(profileNumber)
         let profileLine = substitute(line, prefix, "", "")
         call add(profilesLines, profileLine)
     endfor
-    echo profilesLines
+    " echo profilesLines
 
     let keywordProfile = "profile:"
     let keywordCmd = "cmd:"
@@ -328,27 +342,27 @@ function RunDebugProfile(profileNumber)
     let tmpProfile = {}
     
     for pLine in profilesLines
-        echo "Begin =================================================================================="
-        echo pLine
-        echo tmpProfile
-        echo profiles
+        " echo 'Begin =================================================================================='
+        " echo pLine
+        " echo tmpProfile
+        " echo profiles
 
         " Check to see if we're in the begining of the profile
         " a profile always starts with 'profile:<name>'
         if pLine[0:len(keywordProfile)-1] == keywordProfile
-            echo "DEXTRACE:>> (1) Found profile"
+            " echo 'DEXTRACE:>> (1) Found profile'
             if has_key(tmpProfile, "name") != 0 && has_key(tmpProfile, "cmd") != 0
-                echo "DEXTRACE:>> (2) Profile name not empty"
+                " echo "DEXTRACE:>> (2) Profile name not empty"
                 call add(profiles, tmpProfile)
                 let tmpProfile = {}
             endif
 
-            echo "DEXTRACE:>> (3) Profile name empty"
+            " echo 'DEXTRACE:>> (3) Profile name empty'
             let name = split(pLine, ":")[1]
             let tmpProfile["name"] = name
-            echo name
-            echo tmpProfile
-            echo "DEXTRACE:>> (4) End of profile section"
+            " echo name
+            " echo tmpProfile
+            " echo 'DEXTRACE:>> (4) End of profile section'
             continue
 
         endif
@@ -362,21 +376,21 @@ function RunDebugProfile(profileNumber)
         " Remove the profile name prefix as we don't need it from now on
         let contentLine = substitute(pLine, tmpProfile["name"] . ":", "", "")
 
-        echo "DEXTRACE:>> " . contentLine
+        " echo 'DEXTRACE:>> ' . contentLine
 
         " If we're here it means we're inside of a profile
         
         if contentLine[0:len(keywordCmd)-1] == keywordCmd
-            echo "DEXTRACE:>> (5) Found cmd"
+            " echo 'DEXTRACE:>> (5) Found cmd'
             let cmd = split(contentLine[len(keywordCmd):], ",")
             let tmpProfile["cmd"] = cmd
             continue
         endif
 
-        echo "DEXTRACE:>> (6) End of cmd"
+        " echo 'DEXTRACE:>> (6) End of cmd'
 
         if contentLine[0:len(keywordEnv)-1] == keywordEnv
-            echo "DEXTRACE:>> (7) Found env"
+            " echo 'DEXTRACE:>> (7) Found env'
             let envPair = split(contentLine[len(keywordEnv):], "=")
             let pair = {envPair[0]: envPair[1]}
             if has_key(tmpProfile, "env") == 0
@@ -384,22 +398,26 @@ function RunDebugProfile(profileNumber)
             endif
             call add(tmpProfile["env"], pair)
         endif
-        echo "DEXTRACE:>> (8) End of loop"
+        " echo 'DEXTRACE:>> (8) End of loop'
     endfor
 
     if has_key(tmpProfile, "name") != 0 && has_key(tmpProfile, "cmd") != 0
         call add(profiles, tmpProfile)
     endif
-    echo profiles
+    " echo profiles
 
 
-    let chosenProfile = profiles[a:profileNumber]
+    let chosenProfile = profiles[a:profileNumber-1]
     let g:myActiveDebugProfile = chosenProfile
+
+    " This print is not debug, but just an display of what we've selected
+    echo chosenProfile
+
     if has_key(chosenProfile, "env") != 0
         for envVar in chosenProfile["env"]
             for envKey in keys(envVar)
                 let exportCmd = "let $" . envKey . '="' . envVar[envKey] . '"'
-                echo exportCmd
+                " echo exportCmd
                 execute(exportCmd)
             endfor
         endfor
@@ -415,7 +433,7 @@ func StopDebugProfile()
         for envVar in dbgProfile["env"]
             for envKey in keys(envVar)
                 let exportCmd = "unlet $" . envKey
-                echo exportCmd
+                " echo exportCmd
                 execute(exportCmd)
             endfor
         endfor
