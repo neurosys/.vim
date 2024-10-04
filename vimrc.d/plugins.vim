@@ -41,9 +41,24 @@ Plug 'tpope/vim-surround'
 " Plugin to launch tests from vim https://github.com/vim-test/vim-test
 Plug 'vim-test/vim-test'
 
+" Plugin for calendar notes
+Plug 'mattn/calendar-vim'
+
+" Github Copilot
+Plug 'github/copilot.vim'
+
 """""""""""""""""""""""""""""""""""
 "###      UNTESTED PLUGINS     ###"
 """""""""""""""""""""""""""""""""""
+
+
+
+" C++ completion
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
 
 " Fuzzy finder plugin https://github.com/junegunn/fzf
 " Optional dependencies:

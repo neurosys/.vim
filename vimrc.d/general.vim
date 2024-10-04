@@ -41,7 +41,7 @@ set hls
 set si is
 
 " Use line number when printing (on paper)
-set printoptions=number:y
+" set printoptions=number:y
 
 " Use spaces instead of tabs
 set expandtab
@@ -126,7 +126,7 @@ set virtualedit+=block
 ":cs add cscope.out
 
 " Look for the tags file, up in the folder hierarchy
-set tags=tags;/
+set tags=tags;$HOME
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')

@@ -19,7 +19,10 @@ let g:vimwiki_global_ext = 0 " Don't let vimwiki consider every markdown file as
 " syntax options are ['default', 'markdown', 'media']
 " \ws to list the available wikis and enter them
 let g:vimwiki_list = [{'path': '~/.vimwiki/main', 'syntax': 'markdown', 'ext': 'md'},
-            \ {'path': '~/.vimwiki/references', 'syntax': 'markdown', 'ext': 'md'}]
+            \ {'path': '~/.vimwiki/references', 'syntax': 'markdown', 'ext': 'md'},
+            \ {'path': '~/.vimwiki/processes', 'syntax': 'markdown', 'ext': 'md'},
+            \ {'path': '~/.vimwiki/read-notes', 'syntax': 'markdown', 'ext': 'md'}]
+            
 
 "let wiki = {}
 "let wiki.path = '~/vimwiki/'
@@ -30,3 +33,7 @@ let g:vimwiki_list = [{'path': '~/.vimwiki/main', 'syntax': 'markdown', 'ext': '
 "let g:vimwiki_list = [wiki]
 " ????
 let vimwiki_list_ignore_newline=0
+
+
+let g:vimwiki_table_mappings=0
+

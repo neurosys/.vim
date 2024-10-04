@@ -34,3 +34,6 @@ endif
 "setlocal foldcolumn=0
 "setlocal foldlevel=0
 "setlocal foldminlines=4
+
+" Disable tab mapping from vimwiki so we can use it in Copilot
+iunmap <silent> <buffer> <Tab>
