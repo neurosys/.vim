@@ -82,7 +82,11 @@ set confirm
 " Command line completion (hit tab and switch to next available command or file)
 set wildmenu
 " List all available options coresponding to already entered characters
-set wildmode=list:full
+"set wildmode=list:full
+set wildmode=longest:full
+
+" Show options in a pop-up
+set wildoptions=pum
 
 " Auto complete
 set completeopt=menu,longest,preview
