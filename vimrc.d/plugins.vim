@@ -12,7 +12,7 @@ call plug#begin()
 Plug 'vimwiki/vimwiki'
 
 " Vim intellisense https://github.com/fatih/vim-go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Vim unimpaired, a collection of mappings https://github.com/tpope/vim-unimpaired
 Plug 'tpope/vim-unimpaired'
@@ -45,19 +45,27 @@ Plug 'vim-test/vim-test'
 Plug 'mattn/calendar-vim'
 
 " Github Copilot
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 """""""""""""""""""""""""""""""""""
 "###      UNTESTED PLUGINS     ###"
 """""""""""""""""""""""""""""""""""
 
+"Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all --system-libclang --clang-completer' }
+"Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --system-libclang --clang-completer' }
+"let g:ycm_clangd_binary_path = '/usr/bin/clangd'
+" For macos:
+"let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'
+
+let g:ycm_enable_semantic_highlighting=1
+let g:ycm_enable_inlay_hints=1
 
 
 " C++ completion
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+"Plug 'autozimu/LanguageClient-neovim', {
+"    \ 'branch': 'next',
+"    \ 'do': 'bash install.sh',
+"    \ }
 
 
 " Fuzzy finder plugin https://github.com/junegunn/fzf
@@ -98,7 +106,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/vim-markdown'
 
 " https://github.com/hashivim/vim-terraform
-Plug 'hashivim/vim-terraform'
+" Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
