@@ -62,10 +62,10 @@ let g:ycm_enable_inlay_hints=1
 
 
 " C++ completion
-"Plug 'autozimu/LanguageClient-neovim', {
-"    \ 'branch': 'next',
-"    \ 'do': 'bash install.sh',
-"    \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 
 
 " Fuzzy finder plugin https://github.com/junegunn/fzf
